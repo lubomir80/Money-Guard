@@ -33,7 +33,7 @@ function CardWrapper({
          </CardContent>
          {showSocial ?
             <CardFooter>
-               <div> // TO DO SOCIALS</div>
+               <div> {/* Hello World */}</div>
             </CardFooter> : null}
       </Card>
    )
