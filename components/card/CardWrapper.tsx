@@ -3,38 +3,42 @@
 import {
    Card,
    CardContent,
-   CardFooter,
 } from "@/components/ui/card"
-import CardWrapperHeader from "./CardHeader"
+import CardWrapperHeader from "./CardWrapperHeader"
+import CardWrapperFooter from "./CardWrapperFooter"
 
 
 interface CardWrapperProps {
    children: React.ReactNode,
    headerLogo?: boolean,
    headerLabel?: string,
-   showSocial?: boolean
+   showSocial?: boolean,
+   footerLabel?: string,
+   footerHref?: string
 }
 
 function CardWrapper({
    children,
    headerLogo,
    headerLabel,
-   showSocial
+   showSocial,
+   footerLabel,
+   footerHref
 }: CardWrapperProps) {
 
 
 
 
    return (
-      <Card className="w-[540px] shadow-md text-white px-12 py-10  bg-gradient-radial from-[#0500447e] via-[#5710a3] to-[#3d225a]">
+      <Card className="w-[540px] shadow-md text-white px-12 py-10  cc">
          <CardWrapperHeader headerLogo={headerLogo} headerLabel={headerLabel} />
          <CardContent className="flex flex-col ">
             {children}
          </CardContent>
-         {showSocial ?
-            <CardFooter>
-               <div> {/* Hello World */}</div>
-            </CardFooter> : null}
+         <CardWrapperFooter
+            showSocial={showSocial}
+            footerLabel={footerLabel}
+            footerHref={footerHref} />
       </Card>
    )
 }

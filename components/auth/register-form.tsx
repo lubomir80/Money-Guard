@@ -15,7 +15,7 @@ import {
    FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import FormButtons from '../FormButtons';
+import CardFormButtons from '../card/CardFormButtons';
 
 function RegisterForm() {
    const form = useForm<TRegisterSchema>({
@@ -35,7 +35,7 @@ function RegisterForm() {
 
 
    return (
-      <CardWrapper headerLogo>
+      <CardWrapper headerLogo showSocial>
          <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}
                className="space-y-10 text-left">
@@ -128,7 +128,7 @@ function RegisterForm() {
                      </FormItem>
                   )}
                />
-               <FormButtons
+               <CardFormButtons
                   actionButtonLabel='Register'
                   backButtonHref='/auth/login'
                   backButtonLabel=' Log in'

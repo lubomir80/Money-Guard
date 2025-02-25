@@ -14,7 +14,7 @@ import {
    FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import FormButtons from '../FormButtons';
+import CardFormButtons from '../card/CardFormButtons';
 
 
 function LoginForm() {
@@ -33,7 +33,11 @@ function LoginForm() {
 
 
    return (
-      <CardWrapper headerLogo>
+      <CardWrapper
+         headerLogo
+         showSocial
+         footerLabel="If you forgot your account password"
+         footerHref="/auth/forgot">
          <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}
                className="space-y-10 text-left">
@@ -80,7 +84,7 @@ function LoginForm() {
                      </FormItem>
                   )}
                />
-               <FormButtons
+               <CardFormButtons
                   actionButtonLabel='log in'
                   backButtonHref='/auth/register'
                   backButtonLabel='Register'

@@ -1,13 +1,14 @@
 import Link from "next/link"
-import { Button } from "./ui/button"
+import { Button } from "../ui/button"
 
-interface FormButtonsProps {
+
+interface CardFormButtonsProps {
    actionButtonLabel: string,
    backButtonHref: string,
    backButtonLabel: string
 }
 
-function FormButtons({ actionButtonLabel, backButtonHref, backButtonLabel }: FormButtonsProps) {
+function CardFormButtons({ actionButtonLabel, backButtonHref, backButtonLabel }: CardFormButtonsProps) {
    return (
       <div className="flex flex-col gap-4 w-[300px] mx-auto">
          <Button variant="orange" size="lg" type="submit" className="w-full">
@@ -22,4 +23,4 @@ function FormButtons({ actionButtonLabel, backButtonHref, backButtonLabel }: For
    )
 }
 
-export default FormButtons
+export default CardFormButtons
