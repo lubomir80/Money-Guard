@@ -1,5 +1,7 @@
 "use client"
 
+import { TooltipProps } from 'recharts';
+import { NameType, ValueType } from "recharts/types/component/DefaultTooltipContent"
 import { Tooltip, ResponsiveContainer, Area, AreaChart, YAxis, XAxis } from 'recharts';
 
 
@@ -48,7 +50,7 @@ function CurrencyChart({ rates }: ExchangeRatesProps) {
    )
 }
 
-function CustomTooltip({ active, payload }: any) {
+function CustomTooltip({ active, payload }: TooltipProps<ValueType, NameType>) {
    if (!active || !payload || !payload.length) return null;
 
 
