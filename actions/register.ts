@@ -1,7 +1,7 @@
 "use server"
 
 import * as z from "zod"
-import bcrypt from "bcryptjs"
+import { hash } from "bcryptjs"
 import { RegisterSchema } from "@/schemas"
 import { getUserByEmail } from "@/data/user"
 import { prisma } from "@/prisma/prisma"
@@ -22,7 +22,7 @@ export const register = async (value: z.infer<typeof RegisterSchema>) => {
       }
 
       const lowerCaseEmail = email.toLowerCase();
-      const hashedPassword = await bcrypt.hash(password, 10);
+      const hashedPassword = await hash(password, 10);
 
       const existUser = await getUserByEmail(lowerCaseEmail)
 

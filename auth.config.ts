@@ -1,5 +1,5 @@
 import type { NextAuthConfig } from "next-auth"
-import bcrypt from "bcryptjs"
+import { compare } from 'bcryptjs';
 import Google from "next-auth/providers/google"
 import Credentials from "next-auth/providers/credentials"
 import { LoginSchema } from "./schemas"
@@ -22,7 +22,7 @@ export default {
 
             if (!user || !user.password || !user.email) return null
 
-            const passwordMatch = await bcrypt.compare(password, user.password)
+            const passwordMatch = await compare(password, user.password)
 
             if (passwordMatch) {
                return user
