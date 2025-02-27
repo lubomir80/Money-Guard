@@ -1,11 +1,22 @@
 import { pause } from "@/helpers"
+import { fetchFakeCurrency } from "@/helpers/fakeData"
+import CurrencyChart from "@/components/dashboard/currency/CurrencyChart"
+import CurrencyTable from "@/components/dashboard/currency/CurrencyTable"
 
-export default async function DefaultAnalytics() {
-   await pause(1000)
+
+
+
+async function Currency() {
+   await pause(3000)
+   const getCurrency = await fetchFakeCurrency()
+
 
    return (
-      <section className="h-96 w-96 border-2 rounded-lg p-4 bg-purple-700">
-         <h2 className="text-xl"> Currency 😎</h2>
+      <section>
+         <CurrencyTable rates={getCurrency.rates} />
+         <CurrencyChart rates={getCurrency.rates} />
       </section>
    )
 }
+
+export default Currency

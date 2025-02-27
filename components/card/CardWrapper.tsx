@@ -6,6 +6,7 @@ import {
 } from "@/components/ui/card"
 import CardWrapperHeader from "./CardWrapperHeader"
 import CardWrapperFooter from "./CardWrapperFooter"
+import Spinner from "../Spinner"
 
 
 interface CardWrapperProps {
@@ -14,7 +15,8 @@ interface CardWrapperProps {
    headerLabel?: string,
    showSocial?: boolean,
    footerLabel?: string,
-   footerHref?: string
+   footerHref?: string,
+   isPending?: boolean
 }
 
 function CardWrapper({
@@ -23,22 +25,26 @@ function CardWrapper({
    headerLabel,
    showSocial,
    footerLabel,
-   footerHref
+   footerHref,
+   isPending
 }: CardWrapperProps) {
 
 
 
 
    return (
-      <Card className="w-[540px] shadow-md text-white px-12 py-10  cc">
+      <Card className="w-[540px] shadow-md text-white px-12 py-10
+      bg-gradient-radial from-[#2f2a74] via-[#5710a3] to-[#2e1746]
+      ">
          <CardWrapperHeader headerLogo={headerLogo} headerLabel={headerLabel} />
          <CardContent className="flex flex-col ">
             {children}
          </CardContent>
-         <CardWrapperFooter
+         {!isPending ? <CardWrapperFooter
             showSocial={showSocial}
             footerLabel={footerLabel}
-            footerHref={footerHref} />
+            footerHref={footerHref} /> :
+            <Spinner />}
       </Card>
    )
 }

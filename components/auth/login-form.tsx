@@ -1,6 +1,8 @@
 "use client"
 
 import CardWrapper from '../card/CardWrapper'
+import CardFormButtons from '../card/CardFormButtons';
+import { useState, useTransition } from 'react';
 import { IoMdLock } from "react-icons/io";
 import { MdEmail } from "react-icons/md";
 import { useForm } from "react-hook-form"
@@ -14,10 +16,15 @@ import {
    FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import CardFormButtons from '../card/CardFormButtons';
+import { login } from '@/actions/login';
+import { FormError } from '../form-error';
+
 
 
 function LoginForm() {
+   const [error, setError] = useState<string | undefined>("")
+   const [isPending, startTransition] = useTransition()
+
    const form = useForm<TLoginSchema>({
       resolver: zodResolver(LoginSchema),
       defaultValues: {
@@ -27,7 +34,13 @@ function LoginForm() {
    })
 
    const onSubmit = (values: TLoginSchema) => {
-      console.log({ values });
+      setError("")
+
+      startTransition(() => {
+         login(values).then((data) => {
+            setError(data?.error)
+         })
+      })
       form.reset()
    }
 
@@ -37,7 +50,9 @@ function LoginForm() {
          headerLogo
          showSocial
          footerLabel="If you forgot your account password"
-         footerHref="/auth/forgot">
+         footerHref="/auth/forgot"
+         isPending={isPending}
+      >
          <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}
                className="space-y-10 text-left">
@@ -50,6 +65,7 @@ function LoginForm() {
                            absolute top-2 w-4 h-4 text-whiteText/30" />
                         <FormControl >
                            <Input
+                              disabled={isPending}
                               className="
                                  pl-6
                                  border-b-2 
@@ -73,6 +89,7 @@ function LoginForm() {
                         <IoMdLock className="absolute top-2 w-4 h-4 text-whiteText/30" />
                         <FormControl>
                            <Input
+                              disabled={isPending}
                               className="pl-6 border-b-2 border-whiteText/30
                               placeholder:text-whiteText/30 text-whiteText
                               focus:border-whiteText"
@@ -84,10 +101,12 @@ function LoginForm() {
                      </FormItem>
                   )}
                />
+               <FormError message={error} />
                <CardFormButtons
                   actionButtonLabel='log in'
                   backButtonHref='/auth/register'
                   backButtonLabel='Register'
+                  isPending={isPending}
                />
             </form>
          </Form>
