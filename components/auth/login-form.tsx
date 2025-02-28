@@ -8,6 +8,7 @@ import { MdEmail } from "react-icons/md";
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { LoginSchema, TLoginSchema } from "@/schemas/index"
+import { useSearchParams } from 'next/navigation';
 import {
    Form,
    FormControl,
@@ -21,7 +22,12 @@ import { FormError } from '../form-error';
 
 
 
+
+
 function LoginForm() {
+   const searchParams = useSearchParams()
+   const urlError = searchParams.get("error") === "OAuthAccountNotLinked" ? "Email already in use with different provider" : ""
+
    const [error, setError] = useState<string | undefined>("")
    const [isPending, startTransition] = useTransition()
 
@@ -101,7 +107,7 @@ function LoginForm() {
                      </FormItem>
                   )}
                />
-               <FormError message={error} />
+               <FormError message={error || urlError} />
                <CardFormButtons
                   actionButtonLabel='log in'
                   backButtonHref='/auth/register'

@@ -6,6 +6,7 @@ import { LoginSchema } from "@/schemas"
 import { getUserByEmail } from "@/data/user"
 import { signIn } from "@/auth"
 import { AuthError } from "next-auth";
+import { DEFAULT_LOGIN_REDIRECT } from "@/routes"
 
 
 
@@ -21,6 +22,7 @@ export const login = async (value: z.infer<typeof LoginSchema>) => {
    const lowerCaseEmail = email.toLowerCase();
    const userExists = await getUserByEmail(lowerCaseEmail)
 
+
    if (!userExists || !userExists.email || !userExists.password) {
       return { error: "User doesn't exist, please make registration!" }
    }
@@ -31,7 +33,7 @@ export const login = async (value: z.infer<typeof LoginSchema>) => {
       await signIn("credentials", {
          email: userExists.email,
          password,
-         redirectTo: "/dashboard"
+         redirectTo: DEFAULT_LOGIN_REDIRECT
       })
 
    } catch (error) {

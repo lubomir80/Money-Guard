@@ -2,6 +2,7 @@ import Link from 'next/link'
 import GoogleButton from '../google-button'
 import { CardFooter } from '../ui/card'
 import { Button } from '../ui/button'
+import GithubButton from '../github-button'
 
 function CardWrapperFooter({ footerLabel, footerHref, showSocial }: {
    showSocial?: boolean,
@@ -9,7 +10,11 @@ function CardWrapperFooter({ footerLabel, footerHref, showSocial }: {
    footerHref?: string
 }) {
 
-   const isSocial = showSocial ? <div><GoogleButton /></div> : null
+   const isSocial = showSocial ? (
+      <div className='flex gap-4'>
+         <GoogleButton /><GithubButton />
+      </div>
+   ) : null
    const isFooterLink = footerLabel && footerHref ? (
       <div>
          <Link href={footerHref}>
