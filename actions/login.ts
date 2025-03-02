@@ -1,12 +1,14 @@
 "use server"
 
-
 import * as z from "zod"
 import { LoginSchema } from "@/schemas"
+// import { compare } from 'bcryptjs';
 import { getUserByEmail } from "@/data/user"
 import { signIn } from "@/auth"
 import { AuthError } from "next-auth";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes"
+import { generateVerificationToken } from "@/lib/tokens"
+import { sendVerificationEmail } from "@/lib/email"
 
 
 
@@ -25,6 +27,24 @@ export const login = async (value: z.infer<typeof LoginSchema>) => {
 
    if (!userExists || !userExists.email || !userExists.password) {
       return { error: "User doesn't exist, please make registration!" }
+   }
+
+   // const user = await getUserByEmail(email)
+
+   // if (!user || !user.password || !user.email) return null
+
+   // const passwordMatch = await compare(
+   //    password,
+   //    user.password
+   // )
+   // if (!userExists.emailVerified && passwordMatch) {
+
+   if (!userExists.emailVerified) {
+      const verificationToken = await generateVerificationToken(userExists.email)
+
+      await sendVerificationEmail(verificationToken.email, verificationToken.token)
+
+      return { success: "Confirmation email sent!" }
    }
 
    // send verification email

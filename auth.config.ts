@@ -21,16 +21,18 @@ export default {
          async authorize(credentials) {
             const validatedData = LoginSchema.safeParse(credentials)
 
-            if (!validatedData.success) return null
-            const { email, password } = validatedData.data
-            const user = await getUserByEmail(email)
+            if (validatedData.success) {
+               const { email, password } = validatedData.data
 
-            if (!user || !user.password || !user.email) return null
+               const user = await getUserByEmail(email)
+               if (!user || !user.password || !user.email) return null
 
-            const passwordMatch = await compare(password, user.password)
+               const passwordMatch = await compare(
+                  password,
+                  user.password
+               )
 
-            if (passwordMatch) {
-               return user
+               if (passwordMatch) return user
             }
             return null
          }

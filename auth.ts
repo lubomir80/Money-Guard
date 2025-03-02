@@ -23,8 +23,10 @@ export const { auth, handlers: { GET, POST }, signIn, signOut } = NextAuth({
       async signIn({ user, account }) {
          if (account?.provider !== "credentials") return true
 
-         // const existingUser = await getUserById(user.id);
-         // if (!existingUser || !existingUser?.emailVerified) return false
+         const existingUser = await getUserById(user.id);
+         if (!existingUser || !existingUser?.emailVerified) return false
+
+         // TODO: ADD 2FA check
 
          return true
       },

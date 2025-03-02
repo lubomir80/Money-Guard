@@ -19,8 +19,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { login } from '@/actions/login';
 import { FormError } from '../form-error';
-
-
+import { FormSuccess } from '../form-success';
 
 
 
@@ -29,6 +28,7 @@ function LoginForm() {
    const urlError = searchParams.get("error") === "OAuthAccountNotLinked" ? "Email already in use with different provider" : ""
 
    const [error, setError] = useState<string | undefined>("")
+   const [success, setSuccess] = useState<string | undefined>("")
    const [isPending, startTransition] = useTransition()
 
    const form = useForm<TLoginSchema>({
@@ -41,9 +41,11 @@ function LoginForm() {
 
    const onSubmit = (values: TLoginSchema) => {
       setError("")
+      setSuccess("")
 
       startTransition(() => {
          login(values).then((data) => {
+            setSuccess(data?.success)
             setError(data?.error)
          })
       })
@@ -108,6 +110,7 @@ function LoginForm() {
                   )}
                />
                <FormError message={error || urlError} />
+               <FormSuccess message={success} />
                <CardFormButtons
                   actionButtonLabel='log in'
                   backButtonHref='/auth/register'

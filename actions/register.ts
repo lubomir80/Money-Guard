@@ -5,6 +5,8 @@ import { hash } from "bcryptjs"
 import { RegisterSchema } from "@/schemas"
 import { getUserByEmail } from "@/data/user"
 import { prisma } from "@/prisma/prisma"
+import { generateVerificationToken } from "@/lib/tokens"
+import { sendVerificationEmail } from "@/lib/email"
 
 
 export const register = async (value: z.infer<typeof RegisterSchema>) => {
@@ -38,9 +40,10 @@ export const register = async (value: z.infer<typeof RegisterSchema>) => {
          }
       })
 
-      // TODO:Send verification token email
+      const verificationToken = await generateVerificationToken(email)
+      await sendVerificationEmail(verificationToken.email, verificationToken.token)
 
-      return { success: "User created" }
+      return { success: "Confirmation email sent!" }
 
    } catch (error) {
       console.error("Database error:", error);
