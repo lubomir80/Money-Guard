@@ -4,11 +4,9 @@ import CardWrapper from '../card/CardWrapper'
 import CardFormButtons from '../card/CardFormButtons';
 import { useState, useTransition } from 'react';
 import { IoMdLock } from "react-icons/io";
-import { MdEmail } from "react-icons/md";
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { LoginSchema, TLoginSchema } from "@/schemas/index"
-import { useSearchParams } from 'next/navigation';
+import { NewPasswordSchema, TNewPasswordSchema } from "@/schemas/index"
 import {
    Form,
    FormControl,
@@ -17,37 +15,40 @@ import {
    FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { login } from '@/actions/login';
 import { FormError } from '../form-error';
 import { FormSuccess } from '../form-success';
+import { useSearchParams } from 'next/navigation';
+import { newPassword } from '@/actions/new-password';
 
 
 
-function LoginForm() {
+function NewPasswordForm() {
    const searchParams = useSearchParams()
-   const urlError = searchParams.get("error") === "OAuthAccountNotLinked" ? "Email already in use with different provider" : ""
+   const token = searchParams.get("token")
 
    const [error, setError] = useState<string | undefined>("")
    const [success, setSuccess] = useState<string | undefined>("")
    const [isPending, startTransition] = useTransition()
 
-   const form = useForm<TLoginSchema>({
-      resolver: zodResolver(LoginSchema),
+
+
+   const form = useForm<TNewPasswordSchema>({
+      resolver: zodResolver(NewPasswordSchema),
       defaultValues: {
-         email: "",
-         password: ""
+         password: "",
       }
    })
 
-   const onSubmit = (values: TLoginSchema) => {
+   const onSubmit = (values: TNewPasswordSchema) => {
       setError("")
       setSuccess("")
 
       startTransition(() => {
-         login(values).then((data) => {
-            setSuccess(data?.success)
-            setError(data?.error)
-         })
+         newPassword(values, token)
+            .then((data) => {
+               setError(data?.error)
+               setSuccess(data?.success)
+            })
       })
       form.reset()
    }
@@ -56,39 +57,12 @@ function LoginForm() {
    return (
       <CardWrapper
          headerLogo
-         showSocial
-         footerLabel="If you forgot your account password"
-         footerHref="/auth/reset"
+         headerLabel='Enter a new password'
          isPending={isPending}
       >
          <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}
                className="space-y-10 text-left">
-               <FormField
-                  control={form.control}
-                  name="email"
-                  render={({ field }) => (
-                     <FormItem className="relative">
-                        <MdEmail className="
-                           absolute top-2 w-4 h-4 text-whiteText/30" />
-                        <FormControl >
-                           <Input
-                              disabled={isPending}
-                              className="
-                                 pl-6
-                                 border-b-2 
-                                 border-whiteText/30
-                                 placeholder:text-whiteText/30
-                                 text-whiteText
-                                 focus:border-whiteText"
-                              placeholder="E-mail"
-                              {...field}
-                              type="email" />
-                        </FormControl>
-                        <FormMessage />
-                     </FormItem>
-                  )}
-               />
                <FormField
                   control={form.control}
                   name="password"
@@ -109,12 +83,12 @@ function LoginForm() {
                      </FormItem>
                   )}
                />
-               <FormError message={error || urlError} />
+               <FormError message={error} />
                <FormSuccess message={success} />
                <CardFormButtons
-                  actionButtonLabel='log in'
-                  backButtonHref='/auth/register'
-                  backButtonLabel='Register'
+                  actionButtonLabel='Reset password'
+                  backButtonHref='/auth/login'
+                  backButtonLabel='Login'
                   isPending={isPending}
                />
             </form>
@@ -123,4 +97,4 @@ function LoginForm() {
    )
 }
 
-export default LoginForm
+export default NewPasswordForm

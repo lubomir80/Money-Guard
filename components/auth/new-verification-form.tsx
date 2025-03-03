@@ -25,11 +25,12 @@ function NewVerificationForm() {
          setError("Missing token!")
          return
       }
-      await newVerification(token).then((data) => {
-         setSuccess(data.success)
-         setError(data.error)
+      await newVerification(token)
+         .then((data) => {
+            setSuccess(data?.success)
+            setError(data?.error)
 
-      })
+         })
          .catch(() => {
             setError("Something went wrong!")
          })

@@ -1,7 +1,7 @@
-import Link from 'next/link'
-import GoogleButton from '../google-button'
+import { useRouter } from 'next/navigation'
 import { CardFooter } from '../ui/card'
 import { Button } from '../ui/button'
+import GoogleButton from '../google-button'
 import GithubButton from '../github-button'
 
 function CardWrapperFooter({ footerLabel, footerHref, showSocial }: {
@@ -10,6 +10,8 @@ function CardWrapperFooter({ footerLabel, footerHref, showSocial }: {
    footerHref?: string
 }) {
 
+   const router = useRouter()
+
    const isSocial = showSocial ? (
       <div className='flex gap-4'>
          <GoogleButton /><GithubButton />
@@ -17,11 +19,12 @@ function CardWrapperFooter({ footerLabel, footerHref, showSocial }: {
    ) : null
    const isFooterLink = footerLabel && footerHref ? (
       <div>
-         <Link href={footerHref}>
-            <Button variant="link" className='text-whiteText text-sm tracking-wider'>
-               {footerLabel}
-            </Button>
-         </Link>
+         <Button
+            onClick={() => router.push(footerHref)}
+            variant="link"
+            className='text-whiteText text-sm tracking-wider'>
+            {footerLabel}
+         </Button>
       </div>
    ) : null
 

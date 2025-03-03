@@ -33,3 +33,17 @@ export const RegisterSchema = z.object({
    }
 })
 export type TRegisterSchema = z.infer<typeof RegisterSchema>
+
+export const ResetSchema = z.object({
+   email: z.string().email({
+      message: "Email is required"
+   })
+})
+export type TResetSchema = z.infer<typeof ResetSchema>
+
+export const NewPasswordSchema = z.object({
+   password: z.string().min(6, {
+      message: "Minimum of 6 characters required"
+   })
+})
+export type TNewPasswordSchema = z.infer<typeof NewPasswordSchema>
