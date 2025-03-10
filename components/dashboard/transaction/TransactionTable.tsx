@@ -8,17 +8,19 @@ import {
    TableCaption,
 } from "@/components/ui/table"
 import TransactionItem from "./TransactionItem";
-import { Transaction } from "@/types/index"
-
-
-
-type TransactionsProps = {
-   transactions: Transaction[];
-};
-
+import { TransactionsProps } from "@/types/index"
 
 
 function TransactionTable({ transactions }: TransactionsProps) {
+
+   const isTransactionValid = !transactions?.length ?
+      (<TableCaption className="text-whiteText/90">
+         No items. You can add new.
+      </TableCaption>) :
+      (<TableBody>
+         {transactions?.map(item => <TransactionItem key={item.id} {...item} />)}
+      </TableBody>)
+
 
    return (
       <Table>
@@ -34,16 +36,7 @@ function TransactionTable({ transactions }: TransactionsProps) {
                </TableHead>
             </TableRow>
          </TableHeader>
-
-         {!transactions.length ?
-            <TableCaption className="text-whiteText/90">
-               No items. You can add new.
-            </TableCaption>
-            :
-            <TableBody>
-               {transactions?.map(item => <TransactionItem key={item.id} {...item} />)}
-            </TableBody>
-         }
+         {isTransactionValid}
       </Table>
    )
 }
