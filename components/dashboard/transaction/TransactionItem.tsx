@@ -1,26 +1,28 @@
 "use client"
 import Link from "next/link";
-import { Transaction as TransactionProps } from "@/types/index"
-import { deleteTransaction } from "@/actions/transaction";
+import { Transaction } from "@/types/index"
 import { MdEdit } from "react-icons/md";
 import { Button } from "@/components/ui/button";
+import { useTransition } from "react";
 import {
    TableCell,
    TableRow,
 } from "@/components/ui/table"
-import { useTransition } from "react";
-import Spinner from "@/components/Spinner";
+
+
+type TransactionProps = Transaction & {
+   onDelete: (transactionId: string) => Promise<void>
+}
 
 
 
-function TransactionItem({ id, createdAt, type, category, comment, amount }: TransactionProps) {
+function TransactionItem({ id, createdAt, type, category, comment, amount, onDelete }: TransactionProps) {
+
    const [isPending, startTransition] = useTransition()
 
    const handleDeleteClick = async () => {
-      startTransition(() => {
-
-      })
-      deleteTransaction(id);
+      if (confirm("Are you sure?"))
+         startTransition(() => onDelete(id))
    }
 
 
@@ -42,24 +44,27 @@ function TransactionItem({ id, createdAt, type, category, comment, amount }: Tra
             className={type === "INCOME" ? "text-[#FFB627]" : "text-mango"}>
             {Number(amount).toFixed(2)}
          </TableCell>
-         {isPending ?
-            <TableCell>
-               <Spinner />
-            </TableCell> :
-            <TableCell  >
-               <div className="flex items-center gap-4">
-                  <Link href={`/dashboard/transaction/${id}`}>
+
+         <TableCell>
+            <div className="flex items-center gap-4">
+               <Button
+                  disabled={isPending}
+                  asChild
+                  variant="exit">
+                  <Link href={`/dashboard?editModal=${id}`}>
                      <MdEdit className="w-4 h-4" />
                   </Link>
-                  <Button
-                     onClick={handleDeleteClick}
-                     variant="orange"
-                     size="sm">
-                     Delete
-                  </Button>
-               </div>
-            </TableCell>
-         }
+               </Button>
+               <Button
+                  disabled={isPending}
+                  onClick={handleDeleteClick}
+                  variant="orange"
+                  size="sm">
+                  Delete
+               </Button>
+            </div>
+         </TableCell>
+
       </TableRow >
    )
 }

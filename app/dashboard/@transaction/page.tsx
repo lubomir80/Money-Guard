@@ -7,11 +7,13 @@ import TransactionTable from "@/components/dashboard/transaction/TransactionTabl
 
 
 export default async function Team() {
-   await pause(1000)
+   // await pause(1000)
    // throw new Error('Data not available')
+
    const session = await auth()
-   const user = session?.user
-   const transactions: Transaction[] = await getTransactionByUserId(user?.id) as Transaction[]
+   console.log(session?.user?.id);
+
+   const transactions: Transaction[] = await getTransactionByUserId(session?.user?.id) as Transaction[]
 
 
    return (

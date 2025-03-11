@@ -9,16 +9,45 @@ import {
 } from "@/components/ui/table"
 import TransactionItem from "./TransactionItem";
 import { TransactionsProps } from "@/types/index"
-
+import { useOptimistic } from 'react';
+import { deleteTransaction } from "@/actions/transaction";
+import { toast } from "react-toastify";
 
 function TransactionTable({ transactions }: TransactionsProps) {
+
+   const [optimisticBookings, optimisticDelete] = useOptimistic(transactions, (currTransactions, transactionId) => {
+      if (!currTransactions) return null
+      return currTransactions.filter(transaction => transaction.id !== transactionId)
+   });
+
+   async function handleDelete(transactionId: string) {
+      optimisticDelete(transactionId)
+      await deleteTransaction(transactionId).then((res) => {
+         if (res.error) {
+            toast.error(res.error, {
+               className: "toast-message",
+            })
+         }
+         if (res.success) {
+            toast.success(res.success, {
+               className: "toast-message",
+            })
+         }
+      });
+   }
+
+
 
    const isTransactionValid = !transactions?.length ?
       (<TableCaption className="text-whiteText/90">
          No items. You can add new.
       </TableCaption>) :
       (<TableBody>
-         {transactions?.map(item => <TransactionItem key={item.id} {...item} />)}
+         {optimisticBookings?.map(item =>
+            <TransactionItem
+               onDelete={handleDelete}
+               key={item.id}
+               {...item} />)}
       </TableBody>)
 
 

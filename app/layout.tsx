@@ -1,3 +1,4 @@
+import { ToastContainer } from 'react-toastify';
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
@@ -26,6 +27,7 @@ export default function RootLayout({
             className={`${poppins.className} antialiased
            bg-gradient-to-br from-[#040044] via-[#5710a3] to-[#2e1746]`}>
             {children}
+            <ToastContainer position="bottom-right" />
          </body>
       </html>
    );
