@@ -21,13 +21,14 @@ const buttonVariants = cva(
             link: "text-primary underline-offset-4 hover:underline",
             orange: "bg-gradient-to-r from-[#FFC727] via-[#9E40BA] to-[#7000FF] shadow-xl",
             white: "bg-whiteText text-purple-800 shadow-xl",
-            exit: "flex bg-transparent capitalize hover:bg-transparent [&_svg]:size-5 [&_svg]:shrink-0 gap-1 px-2 py-2",
+            exit: "flex bg-transparent capitalize hover:bg-transparent [&_svg]:size-5 [&_svg]:shrink-0",
             close: " text-[#9E40BA] [&_svg]:size-5 bg-transparent hover:text-[#7000FF] hover: bg-transparent border-none shadow-none"
          },
          size: {
             default: "h-9 px-4 py-2",
             sm: "px-3 py-1 rounded-full capitalize text-[14px]",
             lg: "p-3 rounded-[20px] uppercase w-full max-w-[300px]",
+            round: "w-[44px] h-[44px] rounded-full text-2xl"
          },
       },
       defaultVariants: {

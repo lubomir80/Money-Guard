@@ -1,5 +1,7 @@
 import * as z from "zod"
 
+
+
 export const LoginSchema = z.object({
    email: z.string().email({
       message: "Email is required"
@@ -47,3 +49,36 @@ export const NewPasswordSchema = z.object({
    })
 })
 export type TNewPasswordSchema = z.infer<typeof NewPasswordSchema>
+
+
+//TRANSACTIONS
+
+export const AddTransactionSchema = z.object({
+   type: z.boolean(),
+   category: z.string(),
+   comment: z.optional(z.string().min(5), {
+      message: "Min 5 characters"
+   }),
+   amount: z.coerce.number().positive({
+      message: "Must be a positive"
+   }),
+   transactionDate: z.string()
+}).refine((data) => {
+   if (data.type) {
+      return !!data.category
+   }
+   if (!data.type) {
+      return data.category = "Income"
+   }
+},
+   {
+      message: "Category is required",
+      path: ["category"]
+   },
+)
+
+
+
+export type TAddTransactionSchema = z.infer<typeof AddTransactionSchema>
+
+

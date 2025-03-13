@@ -16,7 +16,7 @@ type TransactionProps = Transaction & {
 
 
 
-function TransactionItem({ id, createdAt, type, category, comment, amount, onDelete }: TransactionProps) {
+function TransactionItem({ id, transactionDate, type, category, comment, amount, onDelete }: TransactionProps) {
 
    const [isPending, startTransition] = useTransition()
 
@@ -29,10 +29,10 @@ function TransactionItem({ id, createdAt, type, category, comment, amount, onDel
    return (
       <TableRow className="[&_td]:px-3 [&_td]:py-5">
          <TableCell >
-            {createdAt.toLocaleDateString()}
+            {transactionDate.toLocaleDateString()}
          </TableCell>
          <TableCell className="text-center">
-            {type === "INCOME" ? "+" : "-"}
+            {!type ? "+" : "-"}
          </TableCell>
          <TableCell>
             {category}
@@ -41,7 +41,7 @@ function TransactionItem({ id, createdAt, type, category, comment, amount, onDel
             {comment}
          </TableCell>
          <TableCell
-            className={type === "INCOME" ? "text-[#FFB627]" : "text-mango"}>
+            className={!type ? "text-[#FFB627]" : "text-mango"}>
             {Number(amount).toFixed(2)}
          </TableCell>
 

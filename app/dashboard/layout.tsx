@@ -19,7 +19,7 @@ function DashboardLayout({ currency, transaction, balance }: DashboardLayoutProp
                {balance}
                {currency}
             </div>
-            <section className="basis-2/3 overflow-y-auto py-10 pl-10 pr-4 
+            <section className="relative basis-2/3 overflow-y-auto py-10 pl-10 pr-4 
             bg-gradient-radial from-[#5710a3] to-[#221849da]">
                {transaction}
             </section>
