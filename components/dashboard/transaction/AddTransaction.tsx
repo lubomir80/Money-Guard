@@ -1,20 +1,22 @@
 "use client"
-import { useSearchParams } from 'next/navigation'
-import AddTransactionForm from './add-transaction-form'
-import AddButton from './AddButton'
+import { Button } from '@/components/ui/button'
+import { useState } from 'react'
+import AddDialog from './add-dialog'
 
 
 
 function AddTransaction() {
-   const searchParams = useSearchParams()
-   const isModalOpen = searchParams.get("modal") === "addTransaction"
-
+   const [open, setOpen] = useState(false)
 
    return (
       <>
-         <AddButton />
-         {isModalOpen ?
-            <AddTransactionForm backLink='/dashboard' /> : null}
+         <Button
+            onClick={() => setOpen(true)}
+            className='absolute top-10 right-4'
+            variant="orange" size="round">
+            +
+         </Button>
+         <AddDialog open={open} setOpen={setOpen} />
       </>
    )
 }

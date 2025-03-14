@@ -1,41 +1,42 @@
 "use client"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { categories, formatCurrentDate } from "@/utils/helpers"
-import { AddTransactionSchema, TAddTransactionSchema } from "@/schemas/index"
-import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form"
-import { Select, SelectContent, SelectTrigger, SelectValue, SelectItem } from '@/components/ui/select'
-import { Input } from "@/components/ui/input"
-import { addTransaction } from "@/actions/transaction"
-import { useTransition } from "react"
-import { toast } from "react-toastify"
-import Thumb from "./Thumb"
 import { Button } from "@/components/ui/button"
+import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form"
+import { Input } from "@/components/ui/input"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { EditTransactionSchema, TEditTransactionSchema } from "@/schemas"
+import { formatDate, categories } from "@/utils/helpers"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useTransition } from "react"
+import { useForm } from "react-hook-form"
+import TransactionType from "./TransactionType"
+import { editTransaction } from "@/actions/transaction"
+import { toast } from "react-toastify"
+import { EditTransactionType } from "@/types"
 
-type AddTransactionFormProps = {
-   onSave: () => void
+type EditTransactionFormProps = {
+   onSave: () => void,
+   transaction: EditTransactionType
 }
 
-function AddTransactionForm({ onSave }: AddTransactionFormProps) {
+
+function EditTransactionForm({ onSave, transaction }: EditTransactionFormProps) {
    const [isPending, startTransition] = useTransition()
-   const currentDate = formatCurrentDate()
 
-
-
-   const form = useForm<TAddTransactionSchema>({
-      resolver: zodResolver(AddTransactionSchema),
+   const form = useForm<TEditTransactionSchema>({
+      resolver: zodResolver(EditTransactionSchema),
       defaultValues: {
-         type: true,
-         category: "",
-         comment: "",
-         amount: 0,
-         transactionDate: currentDate
+         type: transaction.type,
+         category: transaction.category,
+         comment: transaction.comment,
+         amount: transaction.amount,
+         transactionDate: formatDate(transaction.transactionDate),
+         createdAt: transaction.createdAt
       }
    })
 
-   const onSubmit = (values: TAddTransactionSchema) => {
+   const onSubmit = (values: TEditTransactionSchema) => {
       startTransition(() => {
-         addTransaction(values).then((res) => {
+         editTransaction(values, transaction.id).then((res) => {
             if (res.error) {
                toast.error(res.error, {
                   className: "toast-message",
@@ -53,17 +54,18 @@ function AddTransactionForm({ onSave }: AddTransactionFormProps) {
       form.reset()
    }
 
-   const toggleHandler = form.watch("type")
+
 
 
    return (
       <Form {...form}>
          <form onSubmit={form.handleSubmit(onSubmit)}
             className="space-y-10">
-            <Thumb control={form.control} toggle={toggleHandler} />
-            {toggleHandler ?
+            <TransactionType type={transaction.type} />
+            {transaction.type ?
                <FormField
-                  control={form.control} name="category"
+                  control={form.control}
+                  name="category"
                   render={({ field }) => {
                      return <FormItem >
                         <Select
@@ -71,7 +73,7 @@ function AddTransactionForm({ onSave }: AddTransactionFormProps) {
                            onValueChange={field.onChange}>
                            <FormControl>
                               <SelectTrigger className="border-b-2 border-whiteText/30 rounded-none focus:border-whiteText">
-                                 <SelectValue placeholder="Select a category" />
+                                 <SelectValue placeholder={transaction.category} />
                               </SelectTrigger>
                            </FormControl>
                            <SelectContent className='bg-gradient-to-br from-[#533DBA] via-[#50309A] via-[#6A46A5]  to-[#855DAF] border-none text-whiteText'>
@@ -150,7 +152,7 @@ function AddTransactionForm({ onSave }: AddTransactionFormProps) {
             />
             <div className="flex flex-col gap-4 w-[300px] mx-auto">
                <Button disabled={isPending} variant="orange" size="lg" type="submit" className="w-full">
-                  Add
+                  Save
                </Button>
                <Button disabled={isPending} onClick={onSave} size="lg" variant="white">
                   Cancel
@@ -158,8 +160,7 @@ function AddTransactionForm({ onSave }: AddTransactionFormProps) {
             </div>
          </form>
       </Form>
-
    )
 }
 
-export default AddTransactionForm
+export default EditTransactionForm

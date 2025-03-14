@@ -3,7 +3,7 @@
 import * as z from "zod"
 import { auth } from "@/auth";
 import { prisma } from "@/prisma/prisma";
-import { AddTransactionSchema } from "@/schemas";
+import { AddTransactionSchema, EditTransactionSchema } from "@/schemas";
 import { revalidatePath } from 'next/cache';
 
 
@@ -65,5 +65,50 @@ export const addTransaction = async (value: z.infer<typeof AddTransactionSchema>
       return { success: "Successfully added!" }
    } catch (error) {
       return { error: "Error adding transaction!" }
+   }
+}
+
+
+export const editTransaction = async (value: z.infer<typeof EditTransactionSchema>, id: string) => {
+   const session = await auth()
+   const validatedFields = EditTransactionSchema.safeParse(value)
+
+   if (!validatedFields.success) {
+      return { error: "Invalid data" }
+   }
+
+
+   const userId = session?.user?.id || ""
+
+   const {
+      type,
+      category,
+      comment,
+      amount,
+      transactionDate,
+      createdAt
+   } = validatedFields.data
+
+
+   try {
+      await prisma.transaction.update({
+         where: { id },
+         data: {
+            userId,
+            type,
+            category,
+            comment,
+            amount,
+            transactionDate: new Date(transactionDate),
+            createdAt,
+            updatedAt: new Date()
+         }
+      })
+
+
+      revalidatePath('/dashboard')
+      return { success: "Successfully updated!" }
+   } catch (error) {
+      return { error: "Error updating transaction!" }
    }
 }

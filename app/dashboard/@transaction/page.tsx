@@ -19,7 +19,6 @@ export default async function Team() {
          <h2 className="text-[30px] mb-4">Transactions table</h2>
          <TransactionTable transactions={transactions} />
          <AddTransaction />
-
       </>
    )
 }

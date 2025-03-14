@@ -42,31 +42,33 @@ function TransactionTable({ transactions }: TransactionsProps) {
       (<TableCaption className="text-whiteText/90">
          No items. You can add new.
       </TableCaption>) :
-      (<TableBody>
-         {optimisticBookings?.map(item =>
-            <TransactionItem
-               onDelete={handleDelete}
-               key={item.id}
-               {...item} />)}
-      </TableBody>)
+      (
+         <TableBody>
+            {optimisticBookings?.map(item =>
+               <TransactionItem
+                  onDelete={handleDelete}
+                  key={item.id}
+                  {...item} />)}
+         </TableBody>)
 
 
    return (
-      <Table>
-         <TableHeader className="[&_th]:px-3 [&_th]:py-5 [&_th]:bg-whiteText/20 [&_th]:text-white">
-            <TableRow >
-               <TableHead className="first:rounded-l-md ">Date</TableHead>
-               <TableHead className="text-center">Type</TableHead>
-               <TableHead >Category</TableHead>
-               <TableHead className=" w-[200px]">Comment</TableHead>
-               <TableHead >Sum</TableHead>
-               <TableHead className="w-[120px] last:rounded-r-md" >
-                  {/*TODO Add button */}
-               </TableHead>
-            </TableRow>
-         </TableHeader>
-         {isTransactionValid}
-      </Table>
+      <div className="h-[95%] overflow-auto">
+         <Table >
+            <TableHeader className="[&_th]:px-3 [&_th]:py-5 [&_th]:bg-whiteText/20 [&_th]:text-white">
+               <TableRow >
+                  <TableHead className="first:rounded-l-md ">Date</TableHead>
+                  <TableHead className="text-center">Type</TableHead>
+                  <TableHead >Category</TableHead>
+                  <TableHead className=" w-[200px]">Comment</TableHead>
+                  <TableHead >Sum</TableHead>
+                  <TableHead className="w-[120px] last:rounded-r-md" >
+                  </TableHead>
+               </TableRow>
+            </TableHeader>
+            {isTransactionValid}
+         </Table>
+      </div>
    )
 }
 

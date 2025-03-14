@@ -152,3 +152,29 @@ input:-webkit-autofill:focus{
    width: 320px;
    padding: 15px;
  }
+
+
+/* Custom Scrollbar Styling */
+
+ ::-webkit-scrollbar {
+   width: 8px; /* Change scrollbar width */
+   height: 8px; /* For horizontal scroll */
+ }
+ 
+ /* Scrollbar Track */
+ ::-webkit-scrollbar-track {
+   background: #6512bda9; /* Light gray background */
+   border-radius: 10px;
+ }
+ 
+ /* Scrollbar Thumb */
+ ::-webkit-scrollbar-thumb {
+   background: #f0f0f070; /* Blue color */
+   border-radius: 10px;
+   transition: background 0.3s ease-in-out;
+ }
+ 
+ /* Hover Effect */
+ ::-webkit-scrollbar-thumb:hover {
+   background: #f0f0f0b9; /* Darker blue on hover */
+ }

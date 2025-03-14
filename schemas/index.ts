@@ -82,3 +82,19 @@ export const AddTransactionSchema = z.object({
 export type TAddTransactionSchema = z.infer<typeof AddTransactionSchema>
 
 
+export const EditTransactionSchema = z.object({
+   type: z.boolean(),
+   category: z.string(),
+   comment: z.optional(z.string().min(5), {
+      message: "Min 5 characters"
+   }),
+   amount: z.coerce.number().positive({
+      message: "Must be a positive"
+   }),
+   transactionDate: z.string(),
+   createdAt: z.date()
+})
+
+
+
+export type TEditTransactionSchema = z.infer<typeof EditTransactionSchema>

@@ -1,13 +1,12 @@
 "use client"
-import Link from "next/link";
 import { Transaction } from "@/types/index"
-import { MdEdit } from "react-icons/md";
 import { Button } from "@/components/ui/button";
 import { useTransition } from "react";
 import {
    TableCell,
    TableRow,
 } from "@/components/ui/table"
+import EditTransaction from "./EditTransaction";
 
 
 type TransactionProps = Transaction & {
@@ -15,10 +14,28 @@ type TransactionProps = Transaction & {
 }
 
 
-
-function TransactionItem({ id, transactionDate, type, category, comment, amount, onDelete }: TransactionProps) {
+function TransactionItem(
+   {
+      id,
+      transactionDate,
+      type,
+      category,
+      comment,
+      amount,
+      createdAt,
+      onDelete
+   }: TransactionProps) {
 
    const [isPending, startTransition] = useTransition()
+   // const forEditTransaction = {
+   //    id,
+   //    type,
+   //    category,
+   //    comment,
+   //    amount,
+   //    transactionDate,
+   //    createdAt
+   // }
 
    const handleDeleteClick = async () => {
       if (confirm("Are you sure?"))
@@ -47,14 +64,15 @@ function TransactionItem({ id, transactionDate, type, category, comment, amount,
 
          <TableCell>
             <div className="flex items-center gap-4">
-               <Button
-                  disabled={isPending}
-                  asChild
-                  variant="exit">
-                  <Link href={`/dashboard?editModal=${id}`}>
-                     <MdEdit className="w-4 h-4" />
-                  </Link>
-               </Button>
+               <EditTransaction transaction={{
+                  id,
+                  type,
+                  category,
+                  comment,
+                  amount,
+                  transactionDate,
+                  createdAt
+               }} />
                <Button
                   disabled={isPending}
                   onClick={handleDeleteClick}

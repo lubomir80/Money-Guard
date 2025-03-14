@@ -1,6 +1,8 @@
 import { pause } from '@/helpers'
 
 
+
+
 async function StatisticPage() {
    await pause(2000)
 

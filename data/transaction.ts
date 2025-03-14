@@ -1,5 +1,6 @@
 import { prisma } from "@/prisma/prisma"
 
+
 export const getTransactionByUserId = async (userId: string | undefined) => {
    try {
       const transactions = prisma.transaction.findMany({
@@ -11,3 +12,5 @@ export const getTransactionByUserId = async (userId: string | undefined) => {
       return null
    }
 }
+
+
