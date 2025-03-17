@@ -1,16 +1,15 @@
-import { auth } from "@/auth"
-import { Transaction } from "@/types"
-import { getTransactionByUserId } from "@/data/transaction"
 import TransactionTable from "@/components/dashboard/transaction/TransactionTable"
 import AddTransaction from "@/components/dashboard/transaction/AddTransaction"
+import { Transaction } from "@/types"
+import { getTransactionByUserId } from "@/data/transaction"
+import { auth } from "@/auth"
 
 
 
 
-export default async function Team() {
+export default async function TransactionPage() {
    // await pause(1000)
    // throw new Error('Data not available')
-
    const session = await auth()
    const transactions: Transaction[] = await getTransactionByUserId(session?.user?.id) as Transaction[]
 

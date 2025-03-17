@@ -2,10 +2,7 @@
 import { Transaction } from "@/types/index"
 import { Button } from "@/components/ui/button";
 import { useTransition } from "react";
-import {
-   TableCell,
-   TableRow,
-} from "@/components/ui/table"
+import { TableCell, TableRow } from "@/components/ui/table"
 import EditTransaction from "./EditTransaction";
 
 
@@ -27,15 +24,6 @@ function TransactionItem(
    }: TransactionProps) {
 
    const [isPending, startTransition] = useTransition()
-   // const forEditTransaction = {
-   //    id,
-   //    type,
-   //    category,
-   //    comment,
-   //    amount,
-   //    transactionDate,
-   //    createdAt
-   // }
 
    const handleDeleteClick = async () => {
       if (confirm("Are you sure?"))
