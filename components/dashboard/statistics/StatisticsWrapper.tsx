@@ -30,10 +30,10 @@ async function StatisticsWrapper({ filter }: StatisticsWrapperType) {
 
    return (
       <div className='grid grid-cols-[4fr_5fr] gap-8 h-full overflow-auto'>
-         <div className="h-[210px]">
+         <div className="h-[210px] flex items-center justify-center">
             <StatisticsChart categoriesDate={categoriesDate} />
          </div>
-         <div className='flex flex-col'>
+         <div className='flex flex-col '>
             <StatisticsFilter uniquesYear={uniquesYear} />
             <StatisticsTable categoriesDate={categoriesDate} />
          </div>

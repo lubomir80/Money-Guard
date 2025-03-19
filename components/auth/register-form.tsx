@@ -21,10 +21,13 @@ import { useState, useTransition } from 'react';
 import { FormError } from '../form-error';
 import { FormSuccess } from '../form-success';
 
+
+
 function RegisterForm() {
    const [error, setError] = useState<string | undefined>("")
    const [success, setSuccess] = useState<string | undefined>("")
    const [isPending, startTransition] = useTransition()
+
 
    const form = useForm<TRegisterSchema>({
       resolver: zodResolver(RegisterSchema),
@@ -119,7 +122,7 @@ function RegisterForm() {
                         <FormControl>
                            <Input
                               disabled={isPending}
-                              className="pl-6 border-b-2 border-whiteText/30
+                              className="px-6 border-b-2 border-whiteText/30
                               placeholder:text-whiteText/30 text-whiteText
                               focus:border-whiteText"
                               placeholder="Password"

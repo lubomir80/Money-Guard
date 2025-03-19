@@ -28,13 +28,13 @@ export const getUniqueYears = (transactions: Transaction[]): number[] => {
 };
 
 export function getYearPlaceholder(param: string, uniquesYear: number[]): string {
-   if (!param || param === "all") return "All years";
+   if (!param || param === "all") return "All";
    const year = uniquesYear.find(y => y.toString() === param);
    return year?.toString() || "Invalid year"
 }
 
 export const getMonthPlaceholder = (monthNumber: string): string | null => {
-   if (monthNumber === "all" || !monthNumber) return "All months"
+   if (monthNumber === "all" || !monthNumber) return "All"
    const month = months.find(m => m.number === Number(monthNumber));
    return month ? month.name : "Invalid month";
 };
@@ -43,7 +43,7 @@ export const getMonthPlaceholder = (monthNumber: string): string | null => {
 // DATE AND AMOuNT FORMATTING
 
 export function formatAmount(amount?: number): string | undefined {
-   if (!amount) return
+   if (!amount) return "0"
    return new Intl.NumberFormat('en-US', {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,

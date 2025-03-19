@@ -7,7 +7,6 @@ import {
    SelectTrigger,
    SelectValue,
 } from "@/components/ui/select"
-import { useEffect, useState } from "react";
 import { getMonthPlaceholder, getYearPlaceholder, months } from "@/helpers";
 
 type StatisticsFilterProps = {
@@ -20,36 +19,25 @@ function StatisticsFilter({ uniquesYear }: StatisticsFilterProps) {
    const router = useRouter()
    const pathname = usePathname()
 
-   const [month, setMonth] = useState(searchParams.get("month") || "")
-   const [year, setYear] = useState(searchParams.get("year") || "")
+   const month = searchParams.get("month") || "all"
+   const year = searchParams.get("year") || "all"
 
 
-
-
-   useEffect(() => {
-      const handelFilter = (month?: string, year?: string) => {
-         const params = new URLSearchParams(searchParams)
-         if (month) params.set("month", month);
-         if (year) params.set("year", year);
-
-         router.replace(`${pathname}?${params.toString()}`, { scroll: false });
-      }
-      handelFilter(month, year)
-
-   }, [month, year, pathname, searchParams, router])
-
+   const selectHandler = (value: string, name: "month" | "year") => {
+      router.replace(
+         name === "month" ?
+            `${pathname}?month=${value}&year=${year}` :
+            `${pathname}?month=${month}&year=${value}`)
+   }
 
    return (
       <div className="flex gap-5 mb-5">
-         <Select
-            onValueChange={(value) => { setMonth(value) }}>
+         <Select onValueChange={(value) => selectHandler(value, "month")}>
             <SelectTrigger className="w-[50%] border border-whiteText/70 focus:border-whiteText">
                <SelectValue placeholder={getMonthPlaceholder(month)} />
             </SelectTrigger>
             <SelectContent className="bg-gradient-to-br from-[#533DBA] via-[#50309A] via-[#6A46A5]  to-[#855DAF] border-none text-whiteText ">
-               <SelectItem value="all">
-                  All months
-               </SelectItem>
+               <SelectItem value="all">All</SelectItem>
                {months.map(({ name, number }) =>
                   <SelectItem key={`month-${number}`} value={`${number}`}>
                      {name}
@@ -57,16 +45,14 @@ function StatisticsFilter({ uniquesYear }: StatisticsFilterProps) {
                )}
             </SelectContent>
          </Select>
-         <Select
-            onValueChange={(value) => { setYear(value) }}>
+         <Select onValueChange={(value) => selectHandler(value, "year")}>
             <SelectTrigger className="w-[50%] border order-whiteText/70 focus:border-whiteText">
                <SelectValue placeholder={getYearPlaceholder(year, uniquesYear)} />
             </SelectTrigger>
             <SelectContent className="bg-gradient-to-br from-[#533DBA] via-[#50309A] via-[#6A46A5]  to-[#855DAF] border-none text-whiteText ">
-               <SelectItem value="all">All years</SelectItem>
+               <SelectItem value="all">All</SelectItem>
                {uniquesYear?.map((year, i) =>
-                  <SelectItem
-                     key={`${i} + ${year}`}
+                  <SelectItem key={`${i} + ${year}`}
                      value={year.toString()}>
                      {year}
                   </SelectItem>

@@ -9,12 +9,16 @@ function CardWrapperFooter({ footerLabel, footerHref, showSocial }: {
    footerLabel?: string,
    footerHref?: string
 }) {
-
    const router = useRouter()
+   // const searchParams = useSearchParams()
+   // const callbackUrl = searchParams.get("callbackUrl")
+
+
 
    const isSocial = showSocial ? (
       <div className='flex gap-4'>
-         <GoogleButton /><GithubButton />
+         <GoogleButton />
+         <GithubButton />
       </div>
    ) : null
    const isFooterLink = footerLabel && footerHref ? (

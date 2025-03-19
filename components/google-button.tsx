@@ -8,7 +8,8 @@ import { Button } from "./ui/button"
 
 function GoogleButton() {
 
-   const [errorMsgGoogle, dispatchGoogle] = useActionState(googleAuthenticate, undefined)
+   const [errorMsgGoogle, dispatchGoogle] = useActionState(
+      googleAuthenticate, undefined)
 
    return (
       <form className="flex mt-4" action={dispatchGoogle}>

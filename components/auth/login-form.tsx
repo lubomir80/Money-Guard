@@ -25,11 +25,14 @@ import { FormSuccess } from '../form-success';
 
 function LoginForm() {
    const searchParams = useSearchParams()
+   const callbackUrl = searchParams.get("callbackUrl")
    const urlError = searchParams.get("error") === "OAuthAccountNotLinked" ? "Email already in use with different provider" : ""
 
    const [error, setError] = useState<string | undefined>("")
    const [success, setSuccess] = useState<string | undefined>("")
    const [isPending, startTransition] = useTransition()
+
+
 
    const form = useForm<TLoginSchema>({
       resolver: zodResolver(LoginSchema),
@@ -44,7 +47,7 @@ function LoginForm() {
       setSuccess("")
 
       startTransition(() => {
-         login(values).then((data) => {
+         login(values, callbackUrl).then((data) => {
             setSuccess(data?.success)
             setError(data?.error)
          })

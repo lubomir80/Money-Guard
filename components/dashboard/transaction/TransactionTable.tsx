@@ -53,7 +53,7 @@ function TransactionTable({ transactions }: TransactionsProps) {
          </TableHeader>
          {!transactions?.length ?
             (<TableCaption className="text-whiteText/90">
-               No items. You can add new.
+               <p>No items. You can add new. 🧐</p>
             </TableCaption>) :
             (
                <TableBody>

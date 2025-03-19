@@ -5,7 +5,6 @@ import {
    apiAuthPrefix,
    publicRoutes,
    authRoutes,
-   privateRoutes,
 } from "@/routes"
 
 const { auth } = NextAuth(authConfig)
@@ -16,10 +15,10 @@ export default auth((req) => {
 
 
    const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix)
-   // const isPublicRoutes = publicRoutes.includes(nextUrl.pathname);
+   const isPublicRoutes = publicRoutes.includes(nextUrl.pathname);
    const isAuthRoutes = authRoutes.includes(nextUrl.pathname)
 
-   const isPrivateRoute = privateRoutes.includes(nextUrl.pathname);
+
 
    if (isApiAuthRoute) {
       return
@@ -33,10 +32,17 @@ export default auth((req) => {
       return
    }
 
-   console.log(isPrivateRoute)
 
-   if (!isLoggedIn && isPrivateRoute) {
-      return Response.redirect(new URL("auth/login", nextUrl))
+   if (!isLoggedIn && !isPublicRoutes) {
+      let callbackUrl = nextUrl.pathname;
+      if (nextUrl.search) {
+         callbackUrl += nextUrl.search
+      }
+
+      const encodedCallbackUrl = encodeURIComponent(callbackUrl)
+
+      return Response.redirect(new URL(`
+         /auth/login?callbackUrl=${encodedCallbackUrl}`, nextUrl))
    }
    return
 })

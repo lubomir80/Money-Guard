@@ -12,6 +12,11 @@ export const LoginSchema = z.object({
 })
 export type TLoginSchema = z.infer<typeof LoginSchema>
 
+// const passwordValidation = new RegExp(
+//    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
+// );
+
+
 export const RegisterSchema = z.object({
    name: z.string().min(3, {
       message: "Minimum 3 characters required"
@@ -25,15 +30,11 @@ export const RegisterSchema = z.object({
    confirmPassword: z.string().min(6, {
       message: 'Please confirm your password'
    }),
-}).superRefine((val, ctx) => {
-   if (val.password !== val.confirmPassword) {
-      ctx.addIssue({
-         code: z.ZodIssueCode.custom,
-         message: 'Password is not the same as confirm password',
-         path: ['confirmPassword'],
-      })
-   }
-})
+}).refine((data) => data.password === data.confirmPassword, {
+   message: "Password not matching",
+   path: ['confirmPassword'],
+});
+
 export type TRegisterSchema = z.infer<typeof RegisterSchema>
 
 export const ResetSchema = z.object({
