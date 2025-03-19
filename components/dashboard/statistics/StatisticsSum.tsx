@@ -8,8 +8,8 @@ type StatisticsSumProps = {
 
 
 function StatisticsSum({ expenses, income }: StatisticsSumProps) {
-   const checkExpanse = expenses === 0 ? "0.00" : formatAmount(expenses)
-   const checkIncome = expenses === 0 ? "0.00" : formatAmount(income)
+   const checkExpanse = expenses === 0 || undefined ? "0.00" : formatAmount(expenses)
+   const checkIncome = income === 0 || undefined ? "0.00" : formatAmount(income)
 
 
    return (

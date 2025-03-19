@@ -1,4 +1,4 @@
-import { categorizeAmount, formatAmount, pause } from "@/helpers"
+import { categorizeAmount, formatAmount } from "@/helpers"
 import { calculateTotalExpanse, calculateTotalIncome } from "@/helpers/category"
 import { Transaction } from "@/types"
 import { auth } from "@/auth"
@@ -6,8 +6,6 @@ import { getTransactionByUserId } from "@/data/transaction"
 
 
 async function Currency() {
-   await pause(1000)
-   // throw new Error('Data not available')
 
    const session = await auth()
    const transactions: Transaction[] = await getTransactionByUserId(session?.user?.id) as Transaction[]

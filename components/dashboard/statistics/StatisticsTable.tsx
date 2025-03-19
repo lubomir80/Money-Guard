@@ -39,7 +39,7 @@ async function StatisticsTable({ categoriesDate }: StatisticsTableProps) {
 
 
    return (
-      <div>
+      <div className="flex-1 flex flex-col justify-between">
          <Table>
             <TableHeader className=" [&_th]:p-3  [&_th]:bg-whiteText/20 [&_th]:text-whiteText">
                <TableRow >

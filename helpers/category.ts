@@ -112,3 +112,24 @@ export const FinalResult = (transactions: Transaction[]): AllCalculationsResult 
       totalIncome
    };
 };
+
+
+export const filterTransactionsCategory = (
+   transactions: Transaction[],
+   year: number | "all" = "all",
+   month: number | "all" = "all"
+): Transaction[] => {
+   return transactions.filter((transaction) => {
+      const date = new Date(transaction.transactionDate);
+      const transactionYear = date.getFullYear();
+      const transactionMonth = date.getMonth() + 1; // JS months are 0-based (0 = Jan, 1 = Feb, etc.)
+
+      // If year is "all", ignore year filter
+      const matchesYear = year === "all" || transactionYear === year;
+
+      // If month is "all", ignore month filter
+      const matchesMonth = month === "all" || transactionMonth === month;
+
+      return matchesYear && matchesMonth;
+   });
+};

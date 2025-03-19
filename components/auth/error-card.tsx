@@ -9,11 +9,11 @@ function ErrorCard() {
          headerLogo
          headerLabel="Oops! Something went wrong!" >
          <div className="text-center mt-4">
-            <Link href="/auth/login">
-               <Button variant="orange" size="lg">
+            <Button asChild variant="orange" size="lg">
+               <Link href="/auth/login">
                   Back to login
-               </Button>
-            </Link>
+               </Link>
+            </Button>
          </div>
       </CardWrapper>
    )

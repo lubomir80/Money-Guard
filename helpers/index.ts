@@ -1,3 +1,19 @@
+import { Transaction } from "@/types";
+
+export const months = [
+   { name: "January", number: 1 },
+   { name: "February", number: 2 },
+   { name: "March", number: 3 },
+   { name: "April", number: 4 },
+   { name: "May", number: 5 },
+   { name: "June", number: 6 },
+   { name: "July", number: 7 },
+   { name: "August", number: 8 },
+   { name: "September", number: 9 },
+   { name: "October", number: 10 },
+   { name: "November", number: 11 },
+   { name: "December", number: 12 }
+];
 
 // FAKE LOADING PAUSE
 
@@ -6,11 +22,22 @@ export async function pause(ms: number) {
 }
 
 // SELECT STATISTICS DEFAULT VALUE
+export const getUniqueYears = (transactions: Transaction[]): number[] => {
+   const years = transactions.map(trans => new Date(trans.transactionDate).getFullYear());
+   return [...new Set(years)].sort((a, b) => a - b); // Sort in descending order
+};
 
-export function selectPlaceholder(params: string, value: string): string {
-   if (!params || params === "all") return value;
-   return params;
+export function getYearPlaceholder(param: string, uniquesYear: number[]): string {
+   if (!param || param === "all") return "All years";
+   const year = uniquesYear.find(y => y.toString() === param);
+   return year?.toString() || "Invalid year"
 }
+
+export const getMonthPlaceholder = (monthNumber: string): string | null => {
+   if (monthNumber === "all" || !monthNumber) return "All months"
+   const month = months.find(m => m.number === Number(monthNumber));
+   return month ? month.name : "Invalid month";
+};
 
 
 // DATE AND AMOuNT FORMATTING

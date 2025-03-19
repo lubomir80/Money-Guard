@@ -18,7 +18,7 @@ export default function Error({
 
    return (
       <section className="flex flex-col items-center justify-center gap-8 rounded-xl py-8  ">
-         <h2 className="text-[32px] ">Transactions Error!</h2>
+         <h2 className="text-[32px] ">Statistic Error!</h2>
 
          <div className="flex space-x-2 items-center p-2 text-destructive bg-[#3d225a] max-w-fit rounded-md py-1 px-2 tracking-wider text-[0.8rem]">
             <BsExclamationCircleFill className="w-5 h-5" />

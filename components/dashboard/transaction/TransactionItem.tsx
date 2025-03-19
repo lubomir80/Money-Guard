@@ -6,6 +6,7 @@ import { TableCell, TableRow } from "@/components/ui/table"
 import EditTransaction from "./EditTransaction";
 
 
+
 type TransactionProps = Transaction & {
    onDelete: (transactionId: string) => Promise<void>
 }

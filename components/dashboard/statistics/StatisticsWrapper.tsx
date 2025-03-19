@@ -1,11 +1,12 @@
 import { unstable_noStore as noStore } from 'next/cache';
 import StatisticsFilter from "./StatisticsFilter";
 import StatisticsTable from "./StatisticsTable";
-import { FinalResult } from '@/helpers/category';
 import StatisticsChart from './StatisticsChart';
 import { auth } from '@/auth';
 import { Transaction } from '@/types';
 import { getTransactionByUserId } from '@/data/transaction';
+import { filterTransactionsCategory, FinalResult } from '@/helpers/category';
+import { getUniqueYears } from '@/helpers';
 
 
 type StatisticsWrapperType = {
@@ -15,30 +16,25 @@ type StatisticsWrapperType = {
 async function StatisticsWrapper({ filter }: StatisticsWrapperType) {
    noStore();
 
+   const year = Number(filter.year) || "all"
+   const month = Number(filter.month) || "all"
+
    const session = await auth()
    const transactions: Transaction[] = await getTransactionByUserId(session?.user?.id) as Transaction[]
-
-   console.log(filter);
-
-   // const year = filter.year || "all"
-   // const month = filter.month || "all"
-
-
-   // let displayTransactions = [];
+   const uniquesYear = getUniqueYears(transactions)
 
    // TRANSACTIONS FILTER
-
-   const categoriesDate = FinalResult(transactions)
-
+   const displayTransactions: Transaction[] = filterTransactionsCategory(transactions, year, month)
+   const categoriesDate = FinalResult(displayTransactions)
 
 
    return (
-      <div className='flex gap-8'>
-         <div className="flex-1 h-[210px]">
+      <div className='grid grid-cols-[4fr_5fr] gap-8 h-full overflow-auto'>
+         <div className="h-[210px]">
             <StatisticsChart categoriesDate={categoriesDate} />
          </div>
-         <div className='flex-1'>
-            <StatisticsFilter />
+         <div className='flex flex-col'>
+            <StatisticsFilter uniquesYear={uniquesYear} />
             <StatisticsTable categoriesDate={categoriesDate} />
          </div>
       </div>

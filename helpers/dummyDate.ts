@@ -1,4 +1,7 @@
-export async function fetchFakeCurrency() {
+import { pause } from "@/helpers"
+
+export async function fetchDummyCurrency() {
+   await pause(1000)
    const date = new Date();
 
    const data = {
