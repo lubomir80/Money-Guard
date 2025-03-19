@@ -1,5 +1,5 @@
-import Image from "next/image"
 import { CardHeader } from "../ui/card"
+import Logo from "../Logo"
 
 
 interface CardHeaderProps {
@@ -10,13 +10,7 @@ interface CardHeaderProps {
 
 function CardWrapperHeader({ headerLogo, headerLabel }: CardHeaderProps) {
 
-   const isHeaderLabel = headerLogo ?
-      (<div className="flex items-center justify-center flex-col">
-         <Image src="/logo.png" alt="" width={36} height={36} />
-         <h1 className={"text-[27px] drop-shadow-md"}>
-            Money Guard
-         </h1>
-      </div>) : null
+   const isHeaderLabel = headerLogo ? <Logo /> : null
 
    const isHeaderTitle = headerLabel ?
       <h2 className='text-[30px] tracking-wide text-center'>
