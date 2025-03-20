@@ -29,8 +29,8 @@ async function StatisticsWrapper({ filter }: StatisticsWrapperType) {
 
 
    return (
-      <div className='grid grid-cols-[4fr_5fr] gap-8 h-full overflow-auto'>
-         <div className="h-[210px] flex items-center justify-center">
+      <div className='h-full overflow-auto md:grid md:grid-cols-[4fr_5fr] md:gap-8 '>
+         <div className="mb-8 md:mb-0 h-[210px] flex items-center justify-center">
             <StatisticsChart categoriesDate={categoriesDate} />
          </div>
          <div className='flex flex-col '>

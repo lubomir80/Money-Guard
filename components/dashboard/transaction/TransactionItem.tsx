@@ -35,20 +35,20 @@ function TransactionItem(
    return (
       <TableRow className="[&_td]:px-3 [&_td]:py-5">
          <TableCell >
-            {transactionDate.toLocaleDateString()}
+            {transactionDate?.toLocaleDateString() || "N/A"}
          </TableCell>
          <TableCell className="text-center">
-            {!type ? "+" : "-"}
+            {type ? "-" : "+"}
          </TableCell>
          <TableCell>
-            {category}
+            {category || "No category"}
          </TableCell>
          <TableCell className="w-[200px]">
-            {comment}
+            {comment || "No comment"}
          </TableCell>
          <TableCell
             className={!type ? "text-[#FFB627]" : "text-mango"}>
-            {Number(amount).toFixed(2)}
+            {amount ? Number(amount).toFixed(2) : "0.00"}
          </TableCell>
 
          <TableCell>

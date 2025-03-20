@@ -12,7 +12,7 @@ function AddTransaction() {
       <>
          <Button
             onClick={() => setOpen(true)}
-            className='absolute top-10 right-4'
+            className='absolute bottom-4 right-7 md:top-10 md:right-4'
             variant="orange" size="round">
             +
          </Button>

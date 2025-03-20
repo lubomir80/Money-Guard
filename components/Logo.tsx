@@ -8,8 +8,8 @@ function Logo({ small }: { small?: boolean }) {
    if (small) {
       return (
          <div className="flex items-center justify-center flex-col">
-            <Image src={LogoImg} alt="" width={24} height={24} />
-            <h1 className={"text-[18px] drop-shadow-md"}>
+            <Image src={LogoImg} alt="" className='w-[16px] h-[16px] sm:w-[20px] sm:h-[20px] md:w-[24px] md:h-[24px]' />
+            <h1 className={"text-[12px] md:text-[18px] drop-shadow-md"}>
                Money Guard
             </h1>
          </div>
@@ -18,8 +18,8 @@ function Logo({ small }: { small?: boolean }) {
 
    return (
       <div className="flex items-center justify-center flex-col">
-         <Image src={LogoImg} alt="" width={36} height={36} />
-         <h1 className={"text-[27px] drop-shadow-md"}>
+         <Image src={LogoImg} alt="" className='w-[25px] h-[25px] sm:w-[30px] sm:h-[30px] md:w-[36px] md:h-[36px]' />
+         <h1 className={"text-[20px] md:text-[27px] drop-shadow-md"}>
             Money Guard
          </h1>
       </div>

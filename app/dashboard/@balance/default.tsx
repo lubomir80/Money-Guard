@@ -1,12 +1,11 @@
-import { categorizeAmount, formatAmount, pause } from "@/helpers"
 import { calculateTotalExpanse, calculateTotalIncome } from "@/helpers/category"
-import { auth } from "@/auth"
 import { Transaction } from "@/types"
+import { auth } from "@/auth"
 import { getTransactionByUserId } from "@/data/transaction"
+import Balance from "@/components/dashboard/balance/Balance"
 
 
-async function Currency() {
-   await pause(1000)
+async function BalancePage() {
 
    const session = await auth()
    const transactions: Transaction[] = await getTransactionByUserId(session?.user?.id) as Transaction[]
@@ -18,15 +17,8 @@ async function Currency() {
 
 
    return (
-      <section className="px-10 py-3 bg-[#2E225F] shadow-md">
-         <p className="uppercase text-whiteText/40 text-[12px]">Your balance</p>
-         <h1 className="pt-2 font-bold text-2xl tracking-wider">
-            {formatAmount(totalAmount)}
-            <span className="text-lg"> USD</span>
-            <span className="pl-2">{categorizeAmount(totalAmount)}</span>
-         </h1>
-      </section>
+      <Balance totalAmount={totalAmount} />
    )
 }
 
-export default Currency
+export default BalancePage

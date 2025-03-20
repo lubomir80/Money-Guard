@@ -13,14 +13,18 @@ function DashboardLayout({ currency, transaction, balance }: DashboardLayoutProp
    return (
       <div className='max-w-7xl mx-auto flex flex-col h-screen border relative border-black/20'>
          <Header />
-         <main className="flex-1 flex overflow-hidden">
-            <div className='basis-1/3 bg-gradient-to-br from-[#5710a3] to-[#2E225F] overflow-y-auto space-y-10'>
+         <main className="px-5 py-10 flex flex-col md:p-0 md:flex-row space-y-10 md:space-y-0
+         flex-1 overflow-y-auto md:overflow-hidden ">
+            <div className='
+            md:basis-1/3 md:bg-gradient-to-br md:from-[#5710a3] md:to-[#2E225F] md:overflow-y-auto space-y-10'>
                <Navigation />
                {balance}
                {currency}
             </div>
-            <section className="relative basis-2/3 py-10 pl-10 pr-4 bg-gradient-radial from-[#5710a3] to-[#221849da]
-            h-full flex flex-col overflow-hidden">
+            <section className="
+            pb-10
+            md:relative md:basis-2/3 md:py-10 md:pl-10 md:pr-4 md:bg-gradient-radial md:from-[#5710a3] md:to-[#221849da]
+            md:h-full md:flex md:flex-col md:overflow-hidden">
                {transaction}
             </section>
          </main>

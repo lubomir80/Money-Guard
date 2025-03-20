@@ -153,6 +153,13 @@ input:-webkit-autofill:focus{
    padding: 15px;
  }
 
+ @media (max-width: 640px) {
+   .toast-message {
+     width: 100%; 
+     height: 81px;
+   }
+ }
+
 
 /* Custom Scrollbar Styling */
 
@@ -177,4 +184,31 @@ input:-webkit-autofill:focus{
  /* Hover Effect */
  ::-webkit-scrollbar-thumb:hover {
    background: #f0f0f0b9; /* Darker blue on hover */
+ }
+
+
+ @layer components {
+   .expanseLine::after {
+     @apply content-[''] absolute left-0 w-[5px] h-full bg-mango;
+   }
+ }
+
+ @layer components {
+   .incomeLine::after {
+     @apply content-[''] absolute left-0 w-[5px] h-full bg-[#FFB627];
+   }
+ }
+
+ @layer components {
+   .custom-height {
+     @apply w-full bg-gray-200;
+     height: 100%;
+   }
+ 
+   /* For medium screens (md) and above */
+   @media (min-width: 768px) {
+     .custom-height {
+       height: calc(100% - 81px);
+     }
+   }
  }

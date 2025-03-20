@@ -15,10 +15,15 @@ const NavLink: React.FC<NavLinkProps> = ({ href, children, label }) => {
 
 
    return (
-      <Link href={href} className={`flex items-center space-x-2 p-3 rounded-md hover:bg-purple-700/30 ${isActive ? 'text-whiteText font-bold' : 'text-whiteText/50  hover:text-whiteText/100'
+      <Link href={href} className={`p-0 md:p-3 flex
+         items-center space-x-2  rounded-md hover:bg-purple-700/30 ${isActive ? 'text-whiteText font-bold' : 'text-whiteText/50  hover:text-whiteText/100'
          }`}>
-         <span className={`p-1 rounded-md  ${isActive ? "bg-purple-700" : "bg-purple-700/50"}`}>{children}</span>
-         <span className=''>{label}</span>
+         <span
+            className={`[&_svg]:w-[32px] [&_svg]:h-[32px] md:[&_svg]:w-[16px] md:[&_svg]:h-[16px] p-[5px] md:p-1 rounded-md  
+            ${isActive ? "bg-purple-700" : "bg-purple-700/50"}`}>
+            {children}
+         </span>
+         <span className='hidden md:block'>{label}</span>
       </Link>
    );
 };

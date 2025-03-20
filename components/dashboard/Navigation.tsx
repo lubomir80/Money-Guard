@@ -13,7 +13,10 @@ export const NAVIGATION = [
 
 function Navigation() {
    return (
-      <nav className="flex flex-col px-4 pt-10 pb-4">
+      <nav className="flex 
+      items-center justify-center p-5 gap-10
+      md:items-stretch md:justify-stretch
+      md:flex-col md:px-4 md:pt-10 md:pb-4 md:gap-0">
          {NAVIGATION.map((nav, index) =>
             <NavLink key={`link-${index}`}
                href={nav.href}

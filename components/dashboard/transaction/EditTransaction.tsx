@@ -17,6 +17,7 @@ function EditTransaction({ transaction }: EditTransactionProps) {
             onClick={() => setOpen(true)}
             variant="exit">
             <MdEdit />
+            <p className='text-[16px] md:hidden'>Edit</p>
          </Button>
          <EditDialog
             open={open}

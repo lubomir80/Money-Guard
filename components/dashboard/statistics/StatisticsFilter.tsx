@@ -31,9 +31,10 @@ function StatisticsFilter({ uniquesYear }: StatisticsFilterProps) {
    }
 
    return (
-      <div className="flex gap-5 mb-5">
-         <Select onValueChange={(value) => selectHandler(value, "month")}>
-            <SelectTrigger className="w-[50%] border border-whiteText/70 focus:border-whiteText">
+      <div className="flex flex-col sm:flex-row sm:flex gap-5 mb-5">
+         <Select
+            onValueChange={(value) => selectHandler(value, "month")}>
+            <SelectTrigger className="border border-whiteText/70 focus:border-whiteText">
                <SelectValue placeholder={getMonthPlaceholder(month)} />
             </SelectTrigger>
             <SelectContent className="bg-gradient-to-br from-[#533DBA] via-[#50309A] via-[#6A46A5]  to-[#855DAF] border-none text-whiteText ">
@@ -45,8 +46,9 @@ function StatisticsFilter({ uniquesYear }: StatisticsFilterProps) {
                )}
             </SelectContent>
          </Select>
-         <Select onValueChange={(value) => selectHandler(value, "year")}>
-            <SelectTrigger className="w-[50%] border order-whiteText/70 focus:border-whiteText">
+         <Select
+            onValueChange={(value) => selectHandler(value, "year")}>
+            <SelectTrigger className="border order-whiteText/70 focus:border-whiteText">
                <SelectValue placeholder={getYearPlaceholder(year, uniquesYear)} />
             </SelectTrigger>
             <SelectContent className="bg-gradient-to-br from-[#533DBA] via-[#50309A] via-[#6A46A5]  to-[#855DAF] border-none text-whiteText ">
