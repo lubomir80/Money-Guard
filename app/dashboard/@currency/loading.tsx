@@ -2,6 +2,10 @@ import Spinner from "@/components/Spinner";
 
 export default function loading() {
    return (
-      <><Spinner title="Currency" /></>
+      <>
+         <div className="hidden sm:block flex-1 h-full">
+            <Spinner title="Currency" />
+         </div>
+      </>
    )
 }

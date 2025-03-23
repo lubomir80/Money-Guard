@@ -8,11 +8,11 @@ async function User() {
 
    return (
       <div className="flex items-center gap-1">
-         <Avatar className="hidden sm:block">
+         <Avatar className="hidden md:block">
             <AvatarImage src={user?.image || "https://tamilnaducouncil.ac.in/wp-content/uploads/2020/04/dummy-avatar.jpg"} />
             <AvatarFallback>{user?.name}</AvatarFallback>
          </Avatar>
-         <span className='p-1 md:p-2'>{user?.name || "Name"}</span>
+         <span className='p-1 sm:p-2'>{user?.name || "Name"}</span>
       </div>
    )
 }

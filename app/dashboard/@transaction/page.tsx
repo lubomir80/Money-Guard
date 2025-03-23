@@ -3,7 +3,6 @@ import { Transaction } from "@/types"
 import { getTransactionByUserId } from "@/data/transaction"
 import TransactionTable from "@/components/dashboard/transaction/TransactionTable"
 import AddTransaction from "@/components/dashboard/transaction/AddTransaction"
-import TransactionMobileTable from "@/components/dashboard/transaction/TransactionMobileTable"
 
 
 
@@ -17,7 +16,6 @@ export default async function TransactionPage() {
       <>
          <h2 className="text-[24px] text-center md:text-start md:text-[30px] mb-5">Transactions table</h2>
          <TransactionTable transactions={transactions} />
-         <TransactionMobileTable transactions={transactions} />
          <AddTransaction />
       </>
    )

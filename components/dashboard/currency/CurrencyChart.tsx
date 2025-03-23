@@ -17,7 +17,7 @@ function CurrencyChart({ rates }: ExchangeRatesProps) {
 
 
    return (
-      <div className='h-[250px]'>
+      <div className='h-[200px] md:h-[250px]'>
          <ResponsiveContainer width="100%" height="100%">
             <AreaChart
                data={currency}

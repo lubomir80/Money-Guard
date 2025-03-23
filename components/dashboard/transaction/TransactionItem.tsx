@@ -32,6 +32,9 @@ function TransactionItem(
    }
 
 
+
+
+
    return (
       <TableRow className="[&_td]:px-3 [&_td]:py-5">
          <TableCell >
@@ -52,7 +55,7 @@ function TransactionItem(
          </TableCell>
 
          <TableCell>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2 sm:gap-4">
                <EditTransaction transaction={{
                   id,
                   type,

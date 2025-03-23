@@ -10,7 +10,7 @@ function Header() {
          <Logo small />
          <div className='p-0 md:p-1 flex justify-center items-center'>
             <User />
-            <span className='hidden md:inline text-whiteText/60'>|</span>
+            <span className='hidden sm:inline text-whiteText/60'>|</span>
             <Logout />
          </div>
       </header>

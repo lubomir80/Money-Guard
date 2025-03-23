@@ -155,7 +155,8 @@ function EditTransactionForm({ onSave, transaction }: EditTransactionFormProps) 
                <Button disabled={isPending} variant="orange" size="lg" type="submit" className="w-full">
                   Save
                </Button>
-               <Button disabled={isPending} onClick={onSave} size="lg" variant="white">
+               <Button disabled={isPending} type="button"
+                  onClick={onSave} size="lg" variant="white">
                   Cancel
                </Button>
             </div>

@@ -15,8 +15,8 @@ function Navigation() {
    return (
       <nav className="flex 
       items-center justify-center p-5 gap-10
-      md:items-stretch md:justify-stretch
-      md:flex-col md:px-4 md:pt-10 md:pb-4 md:gap-0">
+      sm:items-stretch sm:justify-stretch
+      sm:flex-col sm:px-4 sm:pt-10 sm:pb-4 sm:gap-0">
          {NAVIGATION.map((nav, index) =>
             <NavLink key={`link-${index}`}
                href={nav.href}

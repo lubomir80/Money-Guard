@@ -12,6 +12,7 @@ import { TransactionsProps } from "@/types/index"
 import { useOptimistic } from 'react';
 import { deleteTransaction } from "@/actions/transaction";
 import { toast } from "react-toastify";
+import TransactionMobileItem from "./TransactionMobileItem";
 
 function TransactionTable({ transactions }: TransactionsProps) {
 
@@ -40,14 +41,14 @@ function TransactionTable({ transactions }: TransactionsProps) {
 
    return (
       <>
-         <Table className="hidden md:table-row-group">
+         <Table className="hidden sm:table ">
             <TableHeader className="md:table-header-group 
          [&_th]:px-3 [&_th]:py-5 [&_th]:bg-whiteText/20 [&_th]:text-white">
-               <TableRow >
+               <TableRow  >
                   <TableHead className="first:rounded-l-md ">Date</TableHead>
                   <TableHead className="text-center">Type</TableHead>
                   <TableHead >Category</TableHead>
-                  <TableHead className=" w-[200px]">Comment</TableHead>
+                  <TableHead className="md:w-[200px]">Comment</TableHead>
                   <TableHead >Sum</TableHead>
                   <TableHead className="w-[120px] last:rounded-r-md" >
                   </TableHead>
@@ -66,6 +67,21 @@ function TransactionTable({ transactions }: TransactionsProps) {
                            {...item} />)}
                   </TableBody>)}
          </Table>
+         <div className="sm:hidden text-whiteText/90">
+            {!transactions?.length ?
+               <p className="text-[16px] p-5 text-center w-[240px] mx-auto">
+                  No items. You can add new. 🧐
+               </p>
+               :
+               <div className="w-full flex flex-col gap-4">
+                  {optimisticBookings?.map(item =>
+                     <TransactionMobileItem
+                        onDelete={handleDelete}
+                        key={item.id}
+                        {...item} />)}
+               </div>
+            }
+         </div>
       </>
    )
 }

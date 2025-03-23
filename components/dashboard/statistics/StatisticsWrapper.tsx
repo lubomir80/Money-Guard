@@ -29,7 +29,7 @@ async function StatisticsWrapper({ filter }: StatisticsWrapperType) {
 
 
    return (
-      <div className='h-full overflow-auto md:grid md:grid-cols-[4fr_5fr] md:gap-8 '>
+      <div className='h-full overflow-auto sm:grid sm:grid-cols-[4fr_5fr] sm:gap-8 '>
          <div className="mb-8 md:mb-0 h-[210px] flex items-center justify-center">
             <StatisticsChart categoriesDate={categoriesDate} />
          </div>

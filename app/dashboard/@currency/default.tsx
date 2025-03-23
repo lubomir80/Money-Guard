@@ -9,8 +9,8 @@ async function Currency() {
    const getCurrency = await fetchDummyCurrency()
 
    return (
-      <section className="relative">
-         <span className="absolute top-[-14] left-2
+      <section className="hidden sm:block relative flex-1">
+         <span className="absolute top-[50%] right-2
          bg-[#2E225F] rounded-md py-1 px-2 text-[10px]">
             Dummy Date
          </span>
