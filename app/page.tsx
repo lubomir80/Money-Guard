@@ -11,7 +11,7 @@ export default function Home() {
             headerLabel="Track expenses and incomes😉">
             <div className="text-center">
                <Link href="/auth/login" >
-                  <Button variant="orange" size="lg">
+                  <Button className="w-[300px]" variant="orange" size="lg">
                      Log in
                   </Button>
                </Link>
