@@ -99,3 +99,25 @@ export const EditTransactionSchema = z.object({
 
 
 export type TEditTransactionSchema = z.infer<typeof EditTransactionSchema>
+
+
+export const UserSettingsSchema = z.object({
+   name: z.optional(z.string()),
+   image: z.optional(z.string()),
+   password: z.optional(z.string().min(6)),
+   newPassword: z.optional(z.string().min(6)),
+}).refine((data) => {
+   if (data.password && !data.newPassword) {
+      return false
+   }
+   return true
+},
+   {
+      message: "New password is required!",
+      path: ["newPassword"]
+   },
+)
+
+
+export type TUserSettingsSchema = z.infer<typeof UserSettingsSchema>
+

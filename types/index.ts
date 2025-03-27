@@ -33,3 +33,16 @@ export type EditTransactionType =
 export type EditTransactionProps = {
    transaction: EditTransactionType
 }
+
+
+export type User = {
+   name: string;
+   email: string;
+   image: string | null;
+   id: string;
+   isOauth: boolean;
+};
+
+export type UserProps = {
+   user?: User
+};
