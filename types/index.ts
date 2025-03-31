@@ -40,7 +40,7 @@ export type User = {
    email: string;
    image: string | null;
    id: string;
-   isOauth: boolean;
+   isOauth?: boolean;
 };
 
 export type UserProps = {

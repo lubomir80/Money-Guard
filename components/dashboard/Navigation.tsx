@@ -8,7 +8,7 @@ import { IoMdSettings } from "react-icons/io";
 export const NAVIGATION = [
    { href: '/dashboard', label: 'Home', icon: <IoIosHome /> },
    { href: '/dashboard/statistics', label: 'Statistics', icon: <RiBarChartBoxFill /> },
-   { href: '/dashboard/settings', label: 'User Settings', icon: <IoMdSettings /> },
+   { href: '/dashboard/settings', label: 'Settings', icon: <IoMdSettings /> },
 ];
 
 

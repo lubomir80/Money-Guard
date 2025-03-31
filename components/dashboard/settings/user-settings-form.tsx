@@ -5,18 +5,21 @@ import { useForm } from "react-hook-form"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import { useTransition } from "react"
+import { useState, useTransition } from "react"
 import { TUserSettingsSchema, UserSettingsSchema } from "@/schemas"
 import { settings } from "@/actions/settings"
 import { toast } from "react-toastify"
 import { UserProps } from "@/types"
+import HidePassword from "./HidePassword"
 
 
 
 
 function UserSettingsForm({ user }: UserProps) {
-
    const [isPending, startTransition] = useTransition()
+   const [isHidePassword, setIsHidePassword] = useState(false)
+   const [isHideNewPassword, setIsHideNewPassword] = useState(false)
+
 
    const form = useForm<TUserSettingsSchema>({
       resolver: zodResolver(UserSettingsSchema),
@@ -44,7 +47,6 @@ function UserSettingsForm({ user }: UserProps) {
             }
          });
       })
-      form.reset()
    }
 
 
@@ -62,7 +64,6 @@ function UserSettingsForm({ user }: UserProps) {
                         <Input
                            {...field}
                            disabled={isPending}
-                           min="2022-01-01"
                            type="text"
                            className="border-b-2 border-whiteText/30
                            placeholder:text-whiteText/30 text-whiteText
@@ -102,8 +103,11 @@ function UserSettingsForm({ user }: UserProps) {
             <FormField
                control={form.control}
                name="password"
-               render={({ field }) => {
-                  return <FormItem >
+               render={({ field }) => (
+                  <FormItem className="relative">
+                     <HidePassword
+                        hide={isHidePassword}
+                        setHide={setIsHidePassword} />
                      <FormLabel>Password</FormLabel>
                      <FormControl>
                         <Input
@@ -112,19 +116,22 @@ function UserSettingsForm({ user }: UserProps) {
                            className="border-b-2 border-whiteText/30
                            placeholder:text-whiteText/30 text-whiteText
                            focus:border-whiteText"
-                           type="password"
+                           type={isHidePassword ? "text" : "password"}
                            placeholder="******"
                         />
                      </FormControl>
                      <FormMessage className="text-left" />
                   </FormItem>
-               }}
+               )}
             />
             <FormField
                control={form.control}
                name="newPassword"
-               render={({ field }) => {
-                  return <FormItem >
+               render={({ field }) => (
+                  <FormItem className="relative">
+                     <HidePassword
+                        hide={isHideNewPassword}
+                        setHide={setIsHideNewPassword} />
                      <FormLabel>New password</FormLabel>
                      <FormControl>
                         <Input
@@ -133,13 +140,13 @@ function UserSettingsForm({ user }: UserProps) {
                            className="border-b-2 border-whiteText/30
                            placeholder:text-whiteText/30 text-whiteText
                            focus:border-whiteText"
-                           type="password"
+                           type={isHideNewPassword ? "text" : "password"}
                            placeholder="******"
                         />
                      </FormControl>
                      <FormMessage className="text-left" />
                   </FormItem>
-               }}
+               )}
             />
             <div className="w-[300px] mx-auto">
                <Button disabled={isPending} variant="orange" size="lg" type="submit" className="w-full">
