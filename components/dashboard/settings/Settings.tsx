@@ -10,7 +10,8 @@ async function Settings() {
    const session = await auth()
    const user = session?.user
 
-   const checkProvider = await getAccountByUserId(user?.id || "")
+   const checkProvider = await getAccountByUserId(session?.user?.id || "")
+
 
 
    return (

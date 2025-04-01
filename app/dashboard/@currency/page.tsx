@@ -8,6 +8,7 @@ import CurrencyTable from "@/components/dashboard/currency/CurrencyTable"
 async function Currency() {
    const getCurrency = await fetchDummyCurrency()
 
+
    return (
       <section className="hidden sm:block relative flex-1">
          <span className="absolute top-[50%] right-2
