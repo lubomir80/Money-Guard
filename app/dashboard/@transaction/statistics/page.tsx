@@ -7,6 +7,8 @@ type StatisticPageType = {
 }
 
 
+
+
 async function StatisticPage({ searchParams }: StatisticPageType) {
    const { year, month } = await searchParams
    const filter = { year, month }

@@ -1,6 +1,10 @@
 'use client'
 import { usePathname } from 'next/navigation'
 
+
+
+
+
 function AuthLayout({ children }: { children: React.ReactNode }) {
    const pathname = usePathname()
    const getLastPathname = pathname.substring(pathname.lastIndexOf('/') + 1)

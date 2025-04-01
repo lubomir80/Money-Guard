@@ -7,7 +7,6 @@ import AddTransaction from "@/components/dashboard/transaction/AddTransaction"
 
 
 
-
 export default async function TransactionPage() {
    const session = await auth()
    const transactions: Transaction[] = await getTransactionByUserId(session?.user?.id) as Transaction[]

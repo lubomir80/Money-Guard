@@ -9,10 +9,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-   title: {
-      template: '%s / Money Guard ',
-      default: "Welcome / Money Guard"
-   },
+   title: "Welcome / Money Guard",
    description: "Track expenses and incomes",
 };
 

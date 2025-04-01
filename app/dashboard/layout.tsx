@@ -1,11 +1,17 @@
 import Header from '@/components/dashboard/Header'
 import Navigation from '@/components/dashboard/Navigation'
+import { Metadata } from 'next';
 
 interface DashboardLayoutProps {
    currency: React.ReactNode,
    transaction: React.ReactNode,
    balance: React.ReactNode
 }
+
+export const metadata: Metadata = {
+   title: "Dashboard / Money Guard",
+   description: "Track expenses and incomes",
+};
 
 
 
