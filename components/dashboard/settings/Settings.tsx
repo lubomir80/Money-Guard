@@ -9,16 +9,14 @@ import ProviderMessage from './ProviderMessage';
 async function Settings() {
    const session = await auth()
    const user = session?.user
-
    const checkProvider = await getAccountByUserId(session?.user?.id || "")
-
 
 
    return (
       <div className='flex flex-col gap-10 pb-10
       sm:flex-row'>
          <UserAvatar user={user} />
-         {!checkProvider && user?.isOauth ?
+         {checkProvider?.length === 0 && user?.isOauth ?
             <UserSettingsForm user={user} /> :
             <ProviderMessage />}
       </div>

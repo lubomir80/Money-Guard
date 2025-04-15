@@ -32,6 +32,8 @@ export const { auth, handlers: { GET, POST }, signIn, signOut } = NextAuth({
          return true
       },
       async session({ session, token }: { session: Session; token: JWT }) {
+
+
          return {
             ...session,
             user: {
@@ -49,13 +51,10 @@ export const { auth, handlers: { GET, POST }, signIn, signOut } = NextAuth({
          const existingUser = await getUserById(token.sub)
          if (!existingUser) return token
 
-
          token.isOauth = !!existingUser;
          token.name = existingUser.name;
          token.email = existingUser.email;
          token.image = existingUser.image;
-
-
 
 
          return token
