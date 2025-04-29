@@ -107,6 +107,13 @@ input:-webkit-autofill:focus{
    }
  }
 
+ input:-webkit-autofill,
+ input:-webkit-autofill:hover,
+ input:-webkit-autofill:focus,
+ input:-webkit-autofill:active {
+     transition: background-color 5000000s ease-in-out 0s;
+ }
+
 
  @layer components {
    .spinner {
@@ -190,6 +197,8 @@ input:-webkit-autofill:focus{
 
 
 /* Custom Scrollbar Styling */
+
+
 
  ::-webkit-scrollbar {
    width: 8px; /* Change scrollbar width */
