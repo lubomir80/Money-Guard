@@ -1,3 +1,4 @@
+import Welcome from "@/components/email/Message"
 import { Resend } from "resend"
 
 const resend = new Resend(process.env.RESEND_API_KEY)
@@ -9,12 +10,13 @@ export const sendVerificationEmail = async (
    token: string
 ) => {
    const confirmLink = `${domain}/auth/new-verification?token=${token}`
+   const confirm = true
 
    await resend.emails.send({
       from: "mail@money-guard-v1.fyi",
       to: email,
       subject: "Confirm your email",
-      html: `<p>Click <a href="${confirmLink}"> here</a> to confirm email.</p>`
+      react: Welcome({ confirmLink, confirm })
    })
 }
 
@@ -23,11 +25,12 @@ export const sendPasswordResetEmail = async (
    token: string
 ) => {
    const resetLink = `${domain}/auth/new-password?token=${token}`
+   const reset = true
 
    await resend.emails.send({
       from: "mail@money-guard-v1.fyi",
       to: email,
       subject: "Reset your password",
-      html: `<p>Click <a href="${resetLink}"> here</a> to reset password.</p>`
+      react: Welcome({ resetLink, reset })
    })
 }
