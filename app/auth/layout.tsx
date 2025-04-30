@@ -11,11 +11,11 @@ function AuthLayout({ children }: { children: React.ReactNode }) {
 
 
    return (
-      <main className={`h-full flex flex-col items-center justify-center  bg-no-repeat bg-fixed
+      <div className={`overflow-x-hidden h-full grid place-items-center bg-no-repeat bg-fixed w-screen
          ${getLastPathname === "register" ? "bg-brush bg-cover bg-center" : "bg-golden bg-contain bg-left"}
        bg-cover bg-center `}>
          {children}
-      </main>
+      </div>
    )
 }
 

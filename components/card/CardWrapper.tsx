@@ -15,7 +15,9 @@ interface CardWrapperProps {
    showSocial?: boolean,
    footerLabel?: string,
    footerHref?: string,
-   isPending?: boolean
+   isPending?: boolean,
+   isDialog?: boolean,
+   className?: string
 }
 
 function CardWrapper({
@@ -25,29 +27,37 @@ function CardWrapper({
    showSocial,
    footerLabel,
    footerHref,
-   isPending
+   isPending,
+   isDialog,
+   className
 }: CardWrapperProps) {
 
-
+   const cardStyled = {
+      styled: "text-whiteText grid bg-gradient-radial from-[#2f2a74] via-[#5710a3] to-[#2e1746] content-center",
+      card: "w-full h-full sm:w-[480px] md:w-[540px] sm:h-fit",
+      dialog: "h-[calc(100dvh-77px)] sm:h-full",
+   }
 
 
    return (
-      <Card className="
-      rounded-none h-full w-full flex flex-col items-center justify-center
-      md:w-[540px] md:shadow-md md:rounded-xl md:h-auto
-      text-white md:px-12 md:py-10
-      bg-gradient-radial from-[#2f2a74] via-[#5710a3] to-[#2e1746]
-      ">
-         <CardWrapperHeader headerLogo={headerLogo} headerLabel={headerLabel} />
-         <CardContent className="flex flex-col ">
-            {children}
-         </CardContent>
-         {!isPending ?
-            <CardWrapperFooter showSocial={showSocial}
-               footerLabel={footerLabel} footerHref={footerHref} /> :
-            <span className="text-whiteText/80">
-               Loading...
-            </span>}
+      <Card
+         className={`
+         ${className} ${cardStyled.styled} 
+         ${isDialog ? cardStyled.dialog : cardStyled.card} `}>
+         <div className={`py-10 overflow-y-auto`}>
+            <CardWrapperHeader headerLogo={headerLogo} headerLabel={headerLabel} />
+            <CardContent className="flex flex-col max-w-[360px] mx-auto ">
+               {children}
+            </CardContent>
+            {!isPending ?
+               <CardWrapperFooter showSocial={showSocial}
+                  footerLabel={footerLabel} footerHref={footerHref} /> :
+               <div className="text-center">
+                  <span className="text-whiteText/80">
+                     Loading...
+                  </span>
+               </div>}
+         </div>
       </Card>
    )
 }

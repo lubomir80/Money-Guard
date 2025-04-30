@@ -5,41 +5,40 @@ import {
    DialogDescription,
    DialogHeader,
 } from "@/components/ui/dialog"
-
-import CardWrapper from "@/components/card/CardWrapper";
+import CardWrapper from "@/components/card/CardWrapper"
 import { DialogTitle } from "@radix-ui/react-dialog";
-import { Button } from "../ui/button";
-import { logout } from "@/actions/logout";
+import { Button } from "@/components/ui/button";
 
 
-
-type LogoutDialogProps = {
+type DeleteDialogProps = {
    open: boolean;
    setOpen: Dispatch<SetStateAction<boolean>>;
+   onDelete: () => void
 }
 
 
-function LogoutDialog({ open, setOpen }: LogoutDialogProps) {
+function DeleteDialog({ open, setOpen, onDelete }: DeleteDialogProps) {
 
    const handlerCloseDialog = () => setOpen(false)
-   const handlerLogout = () => logout()
-
-
 
    return (
       <Dialog open={open} onOpenChange={setOpen}>
          <DialogContent>
             <DialogHeader className="hidden">
-               <DialogTitle>Logout dialog</DialogTitle>
+               <DialogTitle>Delete dialog</DialogTitle>
                <DialogDescription></DialogDescription>
             </DialogHeader>
-            <CardWrapper isDialog headerLogo>
+            <CardWrapper
+               isDialog
+               headerLabel="Delete Transaction">
                <div className="space-y-8 ">
-                  <h3 className="mx-auto w-[180px] md:w-full text-center ">Are you sure you want to log out?</h3>
+                  <h3 className="mx-auto w-[250px] md:w-full text-center">
+                     🚩 Are you sure you want to delete this transaction?
+                  </h3>
                   <div className="flex flex-col gap-4 w-[300px] mx-auto">
                      <Button
-                        onClick={handlerLogout} variant="orange" size="lg" type="submit" className="w-full">
-                        Logout
+                        onClick={onDelete} variant="orange" size="lg" type="submit" className="w-full">
+                        Delete
                      </Button>
                      <Button onClick={handlerCloseDialog} size="lg" variant="white">
                         Cancel
@@ -52,4 +51,4 @@ function LogoutDialog({ open, setOpen }: LogoutDialogProps) {
    )
 }
 
-export default LogoutDialog
+export default DeleteDialog

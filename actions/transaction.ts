@@ -21,7 +21,7 @@ export const deleteTransaction = async (transactionId: string) => {
       })
 
       revalidatePath('/dashboard')
-      return { success: "Successfully deleted!" }
+      return { success: "Successfully deleted transaction!" }
    } catch (error) {
       return { error: "Error deleting transaction!" }
    }

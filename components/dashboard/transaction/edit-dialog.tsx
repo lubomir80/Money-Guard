@@ -28,7 +28,9 @@ function EditDialog({ open, setOpen, transaction }: EditDialogProps) {
                <DialogTitle>Edit dialog</DialogTitle>
                <DialogDescription></DialogDescription>
             </DialogHeader>
-            <CardWrapper headerLabel="Edit Transaction">
+            <CardWrapper
+               isDialog
+               headerLabel="Edit Transaction">
                <EditTransactionForm
                   onSave={handlerCloseDialog}
                   transaction={transaction} />

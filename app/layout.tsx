@@ -21,9 +21,11 @@ export default function RootLayout({
    return (
       <html lang="en">
          <body
-            className={`${poppins.className} antialiased
-           bg-gradient-to-br from-[#040044] via-[#5710a3] to-[#2e1746]`}>
-            {children}
+            className={`${poppins.className} antialiased min-h-screen grid
+           bg-gradient-to-br from-[#040044] via-[#5710a3] to-[#2e1746] bg-no-repeat`}>
+            <main className="overflow-y-auto min-h-[100dvh] grid place-items-center">
+               {children}
+            </main>
             <ToastContainer position="bottom-right" />
          </body>
       </html>

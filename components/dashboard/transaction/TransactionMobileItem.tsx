@@ -2,7 +2,8 @@
 import { Transaction } from "@/types"
 import { useTransition } from "react"
 import EditTransaction from "./EditTransaction"
-import { Button } from "@/components/ui/button"
+import DeleteTransaction from "./DeleteTransaction"
+
 
 type TransactionMobileProps = Transaction & {
    onDelete: (transactionId: string) => Promise<void>
@@ -23,9 +24,18 @@ function TransactionMobileItem({
 
    const [isPending, startTransition] = useTransition()
 
+   const transaction = {
+      id,
+      type,
+      category,
+      comment,
+      amount,
+      transactionDate,
+      createdAt
+   }
+
    const handleDeleteClick = async () => {
-      if (confirm("Are you sure?"))
-         startTransition(() => onDelete(id))
+      startTransition(() => onDelete(id))
    }
 
 
@@ -57,22 +67,8 @@ function TransactionMobileItem({
             </span>
          </li>
          <li className="flex items-center justify-between px-4 py-3">
-            <Button
-               disabled={isPending}
-               onClick={handleDeleteClick}
-               variant="orange"
-               size="sm">
-               Delete
-            </Button>
-            <EditTransaction transaction={{
-               id,
-               type,
-               category,
-               comment,
-               amount,
-               transactionDate,
-               createdAt
-            }} />
+            <DeleteTransaction onDelete={handleDeleteClick} isPending={isPending} />
+            <EditTransaction transaction={transaction} />
          </li>
       </ul>
    )

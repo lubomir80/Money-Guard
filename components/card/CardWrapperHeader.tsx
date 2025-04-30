@@ -13,7 +13,7 @@ function CardWrapperHeader({ headerLogo, headerLabel }: CardHeaderProps) {
    const isHeaderLabel = headerLogo ? <Logo /> : null
 
    const isHeaderTitle = headerLabel ?
-      <h2 className='text-[30px] tracking-wide text-center'>
+      <h2 className='text-[30px] tracking-wide text-center max-w-[360px]'>
          {headerLabel}
       </h2> : null
 

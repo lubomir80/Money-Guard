@@ -27,7 +27,7 @@ function AddDialog({ open, setOpen }: AddDialogProps) {
                <DialogTitle>Add dialog</DialogTitle>
                <DialogDescription></DialogDescription>
             </DialogHeader>
-            <CardWrapper headerLabel="Add Transaction">
+            <CardWrapper isDialog className="sm:overflow-y-hidden" headerLabel="Add Transaction">
                <AddTransactionForm onSave={handlerCloseDialog} />
             </CardWrapper>
          </DialogContent>

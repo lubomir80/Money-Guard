@@ -1,9 +1,9 @@
 "use client"
 import { Transaction } from "@/types/index"
-import { Button } from "@/components/ui/button";
 import { useTransition } from "react";
 import { TableCell, TableRow } from "@/components/ui/table"
 import EditTransaction from "./EditTransaction";
+import DeleteTransaction from "./DeleteTransaction";
 
 
 
@@ -26,11 +26,8 @@ function TransactionItem(
 
    const [isPending, startTransition] = useTransition()
 
-   const handleDeleteClick = async () => {
-      if (confirm("Are you sure?"))
-         startTransition(() => onDelete(id))
-   }
-
+   const handleDeleteClick = async () =>
+      startTransition(() => onDelete(id))
 
 
 
@@ -65,13 +62,7 @@ function TransactionItem(
                   transactionDate,
                   createdAt
                }} />
-               <Button
-                  disabled={isPending}
-                  onClick={handleDeleteClick}
-                  variant="orange"
-                  size="sm">
-                  Delete
-               </Button>
+               <DeleteTransaction onDelete={handleDeleteClick} isPending={isPending} />
             </div>
          </TableCell>
 
