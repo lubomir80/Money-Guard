@@ -20,6 +20,7 @@ import { Input } from "@/components/ui/input"
 import { login } from '@/actions/login';
 import { FormError } from '../form-error';
 import { FormSuccess } from '../form-success';
+import HidePassword from '../dashboard/settings/HidePassword';
 
 
 
@@ -28,6 +29,7 @@ function LoginForm() {
    const callbackUrl = searchParams.get("callbackUrl")
    const urlError = searchParams.get("error") === "OAuthAccountNotLinked" ? "Email already in use with different provider" : ""
 
+   const [isHidePassword, setIsHidePassword] = useState(false)
    const [error, setError] = useState<string | undefined>("")
    const [success, setSuccess] = useState<string | undefined>("")
    const [isPending, startTransition] = useTransition()
@@ -76,6 +78,7 @@ function LoginForm() {
                            absolute top-2 w-4 h-4 text-whiteText/30" />
                         <FormControl >
                            <Input
+                              tabIndex={1}
                               disabled={isPending}
                               className="
                                  pl-6
@@ -97,16 +100,22 @@ function LoginForm() {
                   name="password"
                   render={({ field }) => (
                      <FormItem className="relative">
-                        <IoMdLock className="absolute top-2 w-4 h-4 text-whiteText/30" />
+                        <HidePassword
+                           className='top-0 -right-3'
+                           tabIndex={3}
+                           hide={isHidePassword}
+                           setHide={setIsHidePassword} />
+                        <IoMdLock className="absolute top-0 w-4 h-4 text-whiteText/30" />
                         <FormControl>
                            <Input
+                              tabIndex={2}
                               disabled={isPending}
-                              className="pl-6 border-b-2 border-whiteText/30
+                              className="pl-6 pr-8 border-b-2 border-whiteText/30
                               placeholder:text-whiteText/30 text-whiteText
                               focus:border-whiteText"
                               placeholder="Password"
                               {...field}
-                              type="password" />
+                              type={isHidePassword ? "text" : "password"} />
                         </FormControl>
                         <FormMessage />
                      </FormItem>

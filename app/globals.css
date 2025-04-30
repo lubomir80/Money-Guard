@@ -116,6 +116,17 @@ input:-webkit-autofill:focus{
 
 
  @layer components {
+   .no-focus:focus{
+      outline: none !important;
+      border: none !important;
+      box-shadow: none !important;
+   }
+
+   .no-focus:focus svg{
+      color: #FBFBFB;
+   }
+
+
    .spinner {
      margin: 3.2rem auto 1.6rem;
      width: 50px;

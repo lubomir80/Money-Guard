@@ -19,6 +19,7 @@ import { FormError } from '../form-error';
 import { FormSuccess } from '../form-success';
 import { useSearchParams } from 'next/navigation';
 import { newPassword } from '@/actions/new-password';
+import HidePassword from '../dashboard/settings/HidePassword';
 
 
 
@@ -26,6 +27,7 @@ function NewPasswordForm() {
    const searchParams = useSearchParams()
    const token = searchParams.get("token")
 
+   const [isHidePassword, setIsHidePassword] = useState(false)
    const [error, setError] = useState<string | undefined>("")
    const [success, setSuccess] = useState<string | undefined>("")
    const [isPending, startTransition] = useTransition()
@@ -68,16 +70,22 @@ function NewPasswordForm() {
                   name="password"
                   render={({ field }) => (
                      <FormItem className="relative">
-                        <IoMdLock className="absolute top-2 w-4 h-4 text-whiteText/30" />
+                        <HidePassword
+                           tabIndex={2}
+                           className='top-0 -right-3'
+                           hide={isHidePassword}
+                           setHide={setIsHidePassword} />
+                        <IoMdLock className="test absolute top-0 w-4 h-4 text-whiteText/30" />
                         <FormControl>
                            <Input
+                              tabIndex={1}
                               disabled={isPending}
-                              className="pl-6 border-b-2 border-whiteText/30
+                              className="pl-6 pr-8 border-b-2 border-whiteText/30
                               placeholder:text-whiteText/30 text-whiteText
                               focus:border-whiteText"
                               placeholder="Password"
                               {...field}
-                              type="password" />
+                              type={isHidePassword ? "text" : "password"} />
                         </FormControl>
                         <FormMessage />
                      </FormItem>

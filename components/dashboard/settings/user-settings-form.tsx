@@ -63,6 +63,7 @@ function UserSettingsForm({ user }: UserProps) {
                      <FormControl>
                         <Input
                            {...field}
+                           tabIndex={1}
                            disabled={isPending}
                            type="text"
                            className="border-b-2 border-whiteText/30
@@ -84,6 +85,7 @@ function UserSettingsForm({ user }: UserProps) {
                      <FormControl>
                         <Input
                            {...field}
+                           tabIndex={1}
                            disabled={isPending}
                            step=".01"
                            type="text"
@@ -106,14 +108,16 @@ function UserSettingsForm({ user }: UserProps) {
                render={({ field }) => (
                   <FormItem className="relative">
                      <HidePassword
+                        tabIndex={2}
                         hide={isHidePassword}
                         setHide={setIsHidePassword} />
                      <FormLabel>Password</FormLabel>
                      <FormControl>
                         <Input
                            {...field}
+                           tabIndex={1}
                            disabled={isPending}
-                           className="border-b-2 border-whiteText/30
+                           className="border-b-2 border-whiteText/30 pr-10
                            placeholder:text-whiteText/30 text-whiteText
                            focus:border-whiteText"
                            type={isHidePassword ? "text" : "password"}
@@ -130,14 +134,16 @@ function UserSettingsForm({ user }: UserProps) {
                render={({ field }) => (
                   <FormItem className="relative">
                      <HidePassword
+                        tabIndex={3}
                         hide={isHideNewPassword}
                         setHide={setIsHideNewPassword} />
                      <FormLabel>New password</FormLabel>
                      <FormControl>
                         <Input
                            {...field}
+                           tabIndex={2}
                            disabled={isPending}
-                           className="border-b-2 border-whiteText/30
+                           className="border-b-2 border-whiteText/30 pr-10
                            placeholder:text-whiteText/30 text-whiteText
                            focus:border-whiteText"
                            type={isHideNewPassword ? "text" : "password"}
@@ -149,7 +155,7 @@ function UserSettingsForm({ user }: UserProps) {
                )}
             />
             <div className="w-[300px] mx-auto">
-               <Button disabled={isPending} variant="orange" size="lg" type="submit" className="w-full">
+               <Button tabIndex={3} disabled={isPending} variant="orange" size="lg" type="submit" className="w-full">
                   Save
                </Button>
             </div>
