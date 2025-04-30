@@ -6,7 +6,6 @@ import {
 } from "@/components/ui/card"
 import CardWrapperHeader from "./CardWrapperHeader"
 import CardWrapperFooter from "./CardWrapperFooter"
-import Spinner from "../Spinner"
 
 
 interface CardWrapperProps {
@@ -43,11 +42,12 @@ function CardWrapper({
          <CardContent className="flex flex-col ">
             {children}
          </CardContent>
-         {!isPending ? <CardWrapperFooter
-            showSocial={showSocial}
-            footerLabel={footerLabel}
-            footerHref={footerHref} /> :
-            <Spinner />}
+         {!isPending ?
+            <CardWrapperFooter showSocial={showSocial}
+               footerLabel={footerLabel} footerHref={footerHref} /> :
+            <span className="text-whiteText/80">
+               Loading...
+            </span>}
       </Card>
    )
 }
