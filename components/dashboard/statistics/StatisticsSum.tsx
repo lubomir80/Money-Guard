@@ -13,7 +13,7 @@ function StatisticsSum({ expenses, income }: StatisticsSumProps) {
 
 
    return (
-      <div>
+      <div className="border-t border-whiteText rounded-md bg-whiteText/20">
          <div className="flex items-center justify-between px-4 py-3">
             <span>Expenses:</span>
             <span className="text-mango">{checkExpanse}</span>

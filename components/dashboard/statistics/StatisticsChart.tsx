@@ -1,6 +1,8 @@
 "use client"
 
-import { Cell, Label, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { Cell, Label, Pie, PieChart, ResponsiveContainer } from "recharts";
 
 
 type CategorySum = {
@@ -30,8 +32,10 @@ function StatisticsChart({ categoriesDate }: StatisticsChartProps) {
    if (!objectHasProperties) {
       return (
          <div className="mx-auto border-4 border-dotted w-[200px] h-[200px] rounded-full
-         flex items-center justify-center">
-            <span>No Expanses ...</span>
+         flex items-center justify-center p-2">
+            <Button asChild variant="orange" size="round" className="blob w-32 h-32 text-wrap text-center">
+               <Link href="/dashboard" className="">+</Link>
+            </Button>
          </div>
       )
    }
@@ -44,12 +48,12 @@ function StatisticsChart({ categoriesDate }: StatisticsChartProps) {
       }));
 
 
-
    return (
       <>
-         <ResponsiveContainer >
+         <ResponsiveContainer>
             <PieChart width={300} height={200}>
                <Pie
+                  className="outline-none"
                   data={dataFormatting}
                   cx="50%"
                   cy="50%"
@@ -65,7 +69,7 @@ function StatisticsChart({ categoriesDate }: StatisticsChartProps) {
                         );
                      })}
                   <Label
-                     value={`${totalExpanse} pln`}
+                     value={`${totalExpanse} USD`}
                      position="center"
                      fill="white"
                      style={{
@@ -75,7 +79,6 @@ function StatisticsChart({ categoriesDate }: StatisticsChartProps) {
                      }}
                   />
                </Pie>
-               <Tooltip />
             </PieChart>
          </ResponsiveContainer>
       </>

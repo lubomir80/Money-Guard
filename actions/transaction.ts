@@ -62,7 +62,7 @@ export const addTransaction = async (value: z.infer<typeof AddTransactionSchema>
 
 
       revalidatePath('/dashboard')
-      return { success: "Successfully added!" }
+      return { success: "Successfully added transaction!" }
    } catch (error) {
       return { error: "Error adding transaction!" }
    }

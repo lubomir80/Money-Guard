@@ -33,7 +33,7 @@ async function StatisticsWrapper({ filter }: StatisticsWrapperType) {
          <div className="mb-8 md:mb-0 h-[210px] flex items-center justify-center">
             <StatisticsChart categoriesDate={categoriesDate} />
          </div>
-         <div className='flex flex-col '>
+         <div className='flex flex-col p-2'>
             <StatisticsFilter uniquesYear={uniquesYear} />
             <StatisticsTable categoriesDate={categoriesDate} />
          </div>

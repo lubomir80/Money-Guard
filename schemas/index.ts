@@ -57,9 +57,11 @@ export type TNewPasswordSchema = z.infer<typeof NewPasswordSchema>
 export const AddTransactionSchema = z.object({
    type: z.boolean(),
    category: z.string(),
-   comment: z.optional(z.string().min(5), {
+   comment: z.optional(z.string().min(5, {
       message: "Min 5 characters"
-   }),
+   }).max(40, {
+      message: "Max 40 characters"
+   })),
    amount: z.coerce.number().positive({
       message: "Must be a positive"
    }),

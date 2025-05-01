@@ -2,10 +2,10 @@
 import {
    Table,
    TableBody,
+   TableCaption,
    TableHead,
    TableHeader,
    TableRow,
-   TableCaption,
 } from "@/components/ui/table"
 import TransactionItem from "./TransactionItem";
 import { TransactionsProps } from "@/types/index"
@@ -13,6 +13,7 @@ import { useOptimistic } from 'react';
 import { deleteTransaction } from "@/actions/transaction";
 import { toast } from "react-toastify";
 import TransactionMobileItem from "./TransactionMobileItem";
+import CallToAdd from "./call-to-add";
 
 function TransactionTable({ transactions }: TransactionsProps) {
 
@@ -55,9 +56,9 @@ function TransactionTable({ transactions }: TransactionsProps) {
                </TableRow>
             </TableHeader>
             {!transactions?.length ?
-               (<TableCaption className="text-whiteText/90">
-                  <p className=" text-[16px] p-5">No items. You can add new. 🧐</p>
-               </TableCaption>) :
+               <TableCaption>
+                  <CallToAdd />
+               </TableCaption> :
                (
                   <TableBody>
                      {optimisticBookings?.map(item =>
@@ -69,9 +70,7 @@ function TransactionTable({ transactions }: TransactionsProps) {
          </Table>
          <div className="sm:hidden text-whiteText/90">
             {!transactions?.length ?
-               <p className="text-[16px] p-5 text-center w-[240px] mx-auto">
-                  No items. You can add new. 🧐
-               </p>
+               <CallToAdd />
                :
                <div className="w-full flex flex-col gap-4">
                   {optimisticBookings?.map(item =>

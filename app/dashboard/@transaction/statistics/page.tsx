@@ -7,8 +7,6 @@ type StatisticPageType = {
 }
 
 
-
-
 async function StatisticPage({ searchParams }: StatisticPageType) {
    const { year, month } = await searchParams
    const filter = { year, month }
@@ -16,7 +14,9 @@ async function StatisticPage({ searchParams }: StatisticPageType) {
 
    return (
       <>
-         <h2 className="text-[24px] text-center md:text-start md:text-[30px] mb-5">Statistics</h2>
+         <h2 className="text-[24px] text-center md:text-start md:text-[30px] mb-5">
+            Statistics
+         </h2>
          <StatisticsWrapper filter={filter} />
       </>
 
