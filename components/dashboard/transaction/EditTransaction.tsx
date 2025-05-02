@@ -15,8 +15,10 @@ function EditTransaction({ transaction }: EditTransactionProps) {
       <>
          <Button
             onClick={() => setOpen(true)}
-            variant="exit">
-            <MdEdit />
+            variant="exit"
+            size="round"
+            className='sm:hover:scale-[1.2] sm:[&_svg]:hover:text-white/80 transition-all'>
+            <MdEdit className='text-white/30' />
             <p className='text-[16px] sm:hidden'>Edit</p>
          </Button>
          <EditDialog

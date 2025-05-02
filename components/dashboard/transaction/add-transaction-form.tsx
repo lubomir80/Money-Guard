@@ -91,7 +91,7 @@ function AddTransactionForm({ onSave }: AddTransactionFormProps) {
                   }}
                /> : null}
 
-            <div className="flex  justify-between gap-5">
+            <div className="flex gap-5 ">
                <FormField
                   control={form.control}
                   name="amount"
@@ -115,14 +115,14 @@ function AddTransactionForm({ onSave }: AddTransactionFormProps) {
                />
                <FormField control={form.control} name="transactionDate"
                   render={({ field }) => {
-                     return <FormItem className='w-1/2'>
+                     return <FormItem className='w-1/2 '>
                         <FormControl>
                            <Input
                               {...field}
                               disabled={isPending}
                               min="2022-01-01"
                               type="date"
-                              className="pl-6 border-b-2 border-whiteText/30
+                              className="border-b-2 border-whiteText/30
                               placeholder:text-whiteText/30 text-whiteText
                               focus:border-whiteText text-center"
                            />
@@ -158,7 +158,7 @@ function AddTransactionForm({ onSave }: AddTransactionFormProps) {
                </Button>
             </div>
          </form>
-      </Form>
+      </Form >
 
    )
 }

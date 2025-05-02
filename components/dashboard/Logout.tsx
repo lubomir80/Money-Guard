@@ -12,9 +12,10 @@ function Logout() {
       <>
          <Button
             onClick={() => setOpen(true)}
-            variant="exit" className="p-1 sm:p-2">
-            <IoExitOutline size={20} />
-            <span className="hidden sm:block">Exit</span>
+            variant="exit"
+            className="p-1 sm:p-2 bg-transparent hover:text-whiteText [&_*]:hover:text-whiteText">
+            <IoExitOutline className="text-whiteText/50" size={20} />
+            <span className="hidden sm:block text-whiteText/50">Exit</span>
          </Button>
          <LogoutDialog open={open} setOpen={setOpen} />
       </>
