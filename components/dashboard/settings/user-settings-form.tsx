@@ -33,8 +33,15 @@ function UserSettingsForm({ user }: UserProps) {
 
 
    const onSubmit = (values: TUserSettingsSchema) => {
+      const trimmedData = Object.fromEntries(
+         Object.entries(values).map(([key, value]) => [
+            key,
+            typeof value === "string" ? value.trim() : value,
+         ])
+      );
+
       startTransition(() => {
-         settings(values).then((res) => {
+         settings(trimmedData).then((res) => {
             if (res.error) {
                toast.error(res.error, {
                   className: "toast-message",
@@ -154,7 +161,7 @@ function UserSettingsForm({ user }: UserProps) {
                   </FormItem>
                )}
             />
-            <div className="w-[300px] mx-auto">
+            <div className="w-full sm:w-[300px] text-center mx-auto">
                <Button tabIndex={3} disabled={isPending} variant="orange" size="lg" type="submit" className="w-full">
                   Save
                </Button>

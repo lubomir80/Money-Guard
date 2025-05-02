@@ -104,7 +104,9 @@ export type TEditTransactionSchema = z.infer<typeof EditTransactionSchema>
 
 
 export const UserSettingsSchema = z.object({
-   name: z.optional(z.string()),
+   name: z.optional(z.string()
+      .min(3, { message: "Min 3 characters" })
+      .max(30, { message: "Max 30 characters" })),
    image: z.optional(z.string()),
    password: z.optional(z.string().min(6)),
    newPassword: z.optional(z.string().min(6)),

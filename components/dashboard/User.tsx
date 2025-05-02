@@ -14,7 +14,7 @@ async function User() {
             <AvatarImage src={user?.image || "https://tamilnaducouncil.ac.in/wp-content/uploads/2020/04/dummy-avatar.jpg"} />
             <AvatarFallback>{user?.name}</AvatarFallback>
          </Avatar>
-         <span className='p-1 sm:p-2 text-whiteText/50 transition-all'>
+         <span className='p-1 md:p-2 sm:text-whiteText/50 transition-all max-w-[160px] sm:max-w-fit'>
             {user?.name || "Name"}
          </span>
       </Link>
