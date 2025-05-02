@@ -2,7 +2,7 @@
 
 import CardWrapper from '../card/CardWrapper'
 import CardFormButtons from '../card/CardFormButtons';
-import { useState, useTransition } from 'react';
+import { useEffect, useState, useTransition } from 'react';
 import { IoMdLock } from "react-icons/io";
 import { MdEmail } from "react-icons/md";
 import { useForm } from "react-hook-form"
@@ -44,6 +44,18 @@ function LoginForm() {
       }
    })
 
+   const email = form.watch("email")
+   const password = form.watch("password")
+
+   useEffect(() => {
+      if (error || success) {
+         setError("")
+         setSuccess("")
+      }
+   }, [email, password, error, success])
+
+
+
    const onSubmit = (values: TLoginSchema) => {
       setError("")
       setSuccess("")
@@ -54,7 +66,6 @@ function LoginForm() {
             setError(data?.error)
          })
       })
-      form.reset()
    }
 
 
@@ -121,8 +132,8 @@ function LoginForm() {
                      </FormItem>
                   )}
                />
-               <FormError message={error || urlError} />
-               <FormSuccess message={success} />
+               {<FormError message={error || urlError} />}
+               {<FormSuccess message={success} />}
                <CardFormButtons
                   actionButtonLabel='log in'
                   backButtonHref='/auth/register'

@@ -26,6 +26,7 @@ function LogoutDialog({ open, setOpen }: LogoutDialogProps) {
 
 
 
+
    return (
       <Dialog open={open} onOpenChange={setOpen}>
          <DialogContent>
@@ -41,7 +42,8 @@ function LogoutDialog({ open, setOpen }: LogoutDialogProps) {
                         onClick={handlerLogout} variant="orange" size="lg" type="submit" className="w-full">
                         Logout
                      </Button>
-                     <Button onClick={handlerCloseDialog} size="lg" variant="white">
+                     <Button
+                        onClick={handlerCloseDialog} size="lg" variant="white">
                         Cancel
                      </Button>
                   </div>

@@ -35,8 +35,11 @@ function AddTransactionForm({ onSave }: AddTransactionFormProps) {
    })
 
    const onSubmit = (values: TAddTransactionSchema) => {
+      const amount = Number(values.amount)
+      const newVales = { ...values, amount }
+
       startTransition(() => {
-         addTransaction(values).then((res) => {
+         addTransaction(newVales).then((res) => {
             if (res.error) {
                toast.error(res.error, {
                   className: "toast-message",
@@ -101,6 +104,9 @@ function AddTransactionForm({ onSave }: AddTransactionFormProps) {
                            <Input
                               {...field}
                               disabled={isPending}
+                              placeholder="0"
+                              min="0"
+                              max="999999"
                               step=".01"
                               type="number"
                               className=" pl-6 border-b-2 border-whiteText/30

@@ -2,7 +2,7 @@
 
 import CardWrapper from '../card/CardWrapper'
 import CardFormButtons from '../card/CardFormButtons';
-import { useState, useTransition } from 'react';
+import { useEffect, useState, useTransition } from 'react';
 import { IoMdLock } from "react-icons/io";
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -17,7 +17,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { FormError } from '../form-error';
 import { FormSuccess } from '../form-success';
-import { useSearchParams } from 'next/navigation';
+import { redirect, useSearchParams } from 'next/navigation';
 import { newPassword } from '@/actions/new-password';
 import HidePassword from '../dashboard/settings/HidePassword';
 
@@ -41,6 +41,17 @@ function NewPasswordForm() {
       }
    })
 
+   const password = form.watch("password")
+
+   useEffect(() => {
+      if (error || success) {
+         setError("")
+         setSuccess("")
+      }
+   }, [password, error, success])
+
+
+
    const onSubmit = (values: TNewPasswordSchema) => {
       setError("")
       setSuccess("")
@@ -48,11 +59,19 @@ function NewPasswordForm() {
       startTransition(() => {
          newPassword(values, token)
             .then((data) => {
-               setError(data?.error)
-               setSuccess(data?.success)
+               if (data?.error) {
+                  setError(data?.error);
+                  setSuccess("");
+               }
+               if (data?.success) {
+                  setError("");
+                  setSuccess(data?.success);
+                  setTimeout(() => {
+                     redirect('/dashboard');
+                  }, 1000);
+               }
             })
       })
-      form.reset()
    }
 
 

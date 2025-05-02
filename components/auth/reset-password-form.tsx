@@ -2,7 +2,7 @@
 
 import CardWrapper from '../card/CardWrapper'
 import CardFormButtons from '../card/CardFormButtons';
-import { useState, useTransition } from 'react';
+import { useEffect, useState, useTransition } from 'react';
 import { MdEmail } from "react-icons/md";
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -33,6 +33,16 @@ function ResetPasswordForm() {
       }
    })
 
+   const email = form.watch("email")
+
+   useEffect(() => {
+      if (error || success) {
+         setError("")
+         setSuccess("")
+      }
+   }, [email, error, success])
+
+
    const onSubmit = (values: TResetSchema) => {
       setError("")
       setSuccess("")
@@ -43,7 +53,6 @@ function ResetPasswordForm() {
             setError(data?.error)
          })
       })
-      form.reset()
    }
 
 

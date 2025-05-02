@@ -1,6 +1,6 @@
 "use client"
 
-import { useSearchParams } from "next/navigation"
+import { redirect, useSearchParams } from "next/navigation"
 import { useCallback, useEffect, useState } from "react"
 import { newVerification } from "@/actions/new-verification"
 import { FormError } from "../form-error"
@@ -25,12 +25,19 @@ function NewVerificationForm() {
          setError("Missing token!")
          return
       }
-      await newVerification(token)
-         .then((data) => {
-            setSuccess(data?.success)
-            setError(data?.error)
-
-         })
+      await newVerification(token).then((data) => {
+         if (data?.error) {
+            setError(data?.error);
+            setSuccess("");
+         }
+         if (data.success) {
+            setError("");
+            setSuccess(data.success);
+            setTimeout(() => {
+               redirect('/auth/login');
+            }, 1000);
+         }
+      })
          .catch(() => {
             setError("Something went wrong!")
          })
@@ -39,7 +46,6 @@ function NewVerificationForm() {
    useEffect(() => {
       onSubmit()
    }, [onSubmit])
-
 
 
    return (

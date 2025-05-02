@@ -17,10 +17,11 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { register } from '@/actions/register';
-import { useState, useTransition } from 'react';
+import { useEffect, useState, useTransition } from 'react';
 import { FormError } from '../form-error';
 import { FormSuccess } from '../form-success';
 import HidePassword from '../dashboard/settings/HidePassword';
+import { redirect } from 'next/navigation';
 
 
 
@@ -42,6 +43,22 @@ function RegisterForm() {
       }
    })
 
+
+   const name = form.watch("name")
+   const email = form.watch("email")
+   const password = form.watch("password")
+   const confirmPassword = form.watch("confirmPassword")
+
+   useEffect(() => {
+      if (error || success) {
+         setError("")
+         setSuccess("")
+      }
+   },
+      [name, email, password, confirmPassword, error, success])
+
+
+
    const onSubmit = (values: TRegisterSchema) => {
       setError("")
       setSuccess("")
@@ -55,10 +72,12 @@ function RegisterForm() {
             if (data.success) {
                setError("");
                setSuccess(data.success);
+               setTimeout(() => {
+                  redirect('/dashboard');
+               }, 1000);
             }
          })
       })
-      form.reset()
    }
 
 
