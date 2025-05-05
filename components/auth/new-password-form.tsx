@@ -2,7 +2,7 @@
 
 import CardWrapper from '../card/CardWrapper'
 import CardFormButtons from '../card/CardFormButtons';
-import { useEffect, useState, useTransition } from 'react';
+import { useState, useTransition } from 'react';
 import { IoMdLock } from "react-icons/io";
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -40,16 +40,6 @@ function NewPasswordForm() {
          password: "",
       }
    })
-
-   const password = form.watch("password")
-
-   useEffect(() => {
-      if (error || success) {
-         setError("")
-         setSuccess("")
-      }
-   }, [password, error, success])
-
 
 
    const onSubmit = (values: TNewPasswordSchema) => {

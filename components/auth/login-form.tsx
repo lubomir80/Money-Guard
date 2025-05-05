@@ -2,7 +2,7 @@
 
 import CardWrapper from '../card/CardWrapper'
 import CardFormButtons from '../card/CardFormButtons';
-import { useEffect, useState, useTransition } from 'react';
+import { useState, useTransition } from 'react';
 import { IoMdLock } from "react-icons/io";
 import { MdEmail } from "react-icons/md";
 import { useForm } from "react-hook-form"
@@ -43,17 +43,6 @@ function LoginForm() {
          password: ""
       }
    })
-
-   const email = form.watch("email")
-   const password = form.watch("password")
-
-   useEffect(() => {
-      if (error || success) {
-         setError("")
-         setSuccess("")
-      }
-   }, [email, password, error, success])
-
 
 
    const onSubmit = (values: TLoginSchema) => {

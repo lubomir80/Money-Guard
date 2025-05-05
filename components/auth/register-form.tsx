@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { register } from '@/actions/register';
-import { useEffect, useState, useTransition } from 'react';
+import { useState, useTransition } from 'react';
 import { FormError } from '../form-error';
 import { FormSuccess } from '../form-success';
 import HidePassword from '../dashboard/settings/HidePassword';
@@ -43,19 +43,6 @@ function RegisterForm() {
       }
    })
 
-
-   const name = form.watch("name")
-   const email = form.watch("email")
-   const password = form.watch("password")
-   const confirmPassword = form.watch("confirmPassword")
-
-   useEffect(() => {
-      if (error || success) {
-         setError("")
-         setSuccess("")
-      }
-   },
-      [name, email, password, confirmPassword, error, success])
 
 
 

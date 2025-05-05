@@ -6,15 +6,29 @@ export const LoginSchema = z.object({
    email: z.string().email({
       message: "Email is required"
    }),
-   password: z.string().min(1, {
+   password: z.string().min(3, {
       message: "Password is required"
    })
 })
 export type TLoginSchema = z.infer<typeof LoginSchema>
 
-// const passwordValidation = new RegExp(
-//    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
-// );
+
+const passwordSchema = z
+   .string()
+   .min(8, { message: "Minimum 8 characters" })
+   .max(20, { message: "Maximum 20 characters" })
+   .refine((password) => /[A-Z]/.test(password), {
+      message: "Must include at least one uppercase letter",
+   })
+   .refine((password) => /[a-z]/.test(password), {
+      message: "Must include at least one lowercase letter",
+   })
+   .refine((password) => /[0-9]/.test(password), {
+      message: "Must include at least one number",
+   })
+   .refine((password) => /[!@#$%^&*]/.test(password), {
+      message: "Must include at least one special character (!@#$%^&*)",
+   });
 
 
 export const RegisterSchema = z.object({
@@ -24,9 +38,7 @@ export const RegisterSchema = z.object({
    email: z.string().email({
       message: "Email is required"
    }),
-   password: z.string().min(6, {
-      message: "Minimum 6 characters required"
-   }),
+   password: passwordSchema,
    confirmPassword: z.string().min(6, {
       message: 'Please confirm your password'
    }),
@@ -45,9 +57,7 @@ export const ResetSchema = z.object({
 export type TResetSchema = z.infer<typeof ResetSchema>
 
 export const NewPasswordSchema = z.object({
-   password: z.string().min(6, {
-      message: "Minimum of 6 characters required"
-   })
+   password: passwordSchema
 })
 export type TNewPasswordSchema = z.infer<typeof NewPasswordSchema>
 
