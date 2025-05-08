@@ -126,6 +126,13 @@ input:-webkit-autofill:focus{
       color: #FBFBFB;
    }
 
+   .gradient-text {
+      background: linear-gradient(90deg, #FFC727, #9E40BA); /* left to right */
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
 
    .spinner {
      margin: 3.2rem auto 1.6rem;

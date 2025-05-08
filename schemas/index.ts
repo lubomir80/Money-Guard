@@ -135,3 +135,53 @@ export const UserSettingsSchema = z.object({
 
 export type TUserSettingsSchema = z.infer<typeof UserSettingsSchema>
 
+
+
+// user settings
+
+export const UserNameSchema = z.object({
+   name: z.string()
+      .min(3, { message: "Min 3 characters" })
+      .max(30, { message: "Max 30 characters" }),
+})
+
+
+export type TUserNameSchema = z.infer<typeof UserNameSchema>
+
+
+const newPasswordSchema = z.optional(
+   z.string()
+      .min(8, { message: "Minimum 8 characters" })
+      .max(20, { message: "Maximum 20 characters" }))
+   .refine((password) => password && /[A-Z]/.test(password), {
+      message: "Must include at least one uppercase letter",
+   })
+   .refine((password) => password && /[a-z]/.test(password), {
+      message: "Must include at least one lowercase letter",
+   })
+   .refine((password) => password && /[0-9]/.test(password), {
+      message: "Must include at least one number",
+   })
+   .refine((password) => password && /[!@#$%^&*]/.test(password), {
+      message: "Must include at least one special character (!@#$%^&*)",
+   });
+
+
+
+export const UserPasswordSchema = z.object({
+   password: z.optional(z.string().min(6)),
+   newPassword: newPasswordSchema
+}).refine((data) => {
+   if (data.password && !data.newPassword) {
+      return false
+   }
+   return true
+},
+   {
+      message: "New password is required!",
+      path: ["newPassword"]
+   },
+)
+
+
+export type TUserPasswordSchema = z.infer<typeof UserPasswordSchema>

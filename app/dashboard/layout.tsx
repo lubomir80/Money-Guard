@@ -31,7 +31,7 @@ function DashboardLayout({ currency, transaction, balance }: DashboardLayoutProp
             </div>
             <section className="flex-1 pb-10 pr-0 
             md:relative md:basis-2/3 md:py-10 md:pl-10 md:pr-4 md:bg-gradient-radial md:from-[#5710a3] md:to-[#221849da]
-            md:h-full flex flex-col md:overflow-hidden">
+            md:h-full flex flex-col md:overflow-hidden o">
                {transaction}
             </section>
          </div>

@@ -9,15 +9,15 @@ export default {
    ],
    theme: {
       screens: {
-         'sm': '640px',
-         'md': '992px'
+         sm: '640px',
+         md: '992px'
       },
       extend: {
          colors: {
             background: 'hsl(var(--background))',
             foreground: 'hsl(var(--foreground))',
-            whiteText: "#FBFBFB",
-            mango: "#FF868D",
+            whiteText: '#FBFBFB',
+            mango: '#FF868D',
             card: {
                DEFAULT: 'hsl(var(--card))',
                foreground: 'hsl(var(--card-foreground))'
@@ -64,9 +64,31 @@ export default {
          },
          backgroundImage: {
             'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-            'golden': "url('../public/golden.png')",
-            'brush': "url('../public/brush-hand.png')",
+            golden: "url('../public/golden.png')",
+            brush: "url('../public/brush-hand.png')"
          },
+         keyframes: {
+            'accordion-down': {
+               from: {
+                  height: '0'
+               },
+               to: {
+                  height: 'var(--radix-accordion-content-height)'
+               }
+            },
+            'accordion-up': {
+               from: {
+                  height: 'var(--radix-accordion-content-height)'
+               },
+               to: {
+                  height: '0'
+               }
+            }
+         },
+         animation: {
+            'accordion-down': 'accordion-down 0.2s ease-out',
+            'accordion-up': 'accordion-up 0.2s ease-out'
+         }
       }
    },
    plugins: [require("tailwindcss-animate")],
