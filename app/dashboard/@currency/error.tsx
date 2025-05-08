@@ -19,7 +19,7 @@ export default function Error({
    return (
 
       <section className="px-10 py-3 bg-[#2E225F] shadow-md text-center">
-         <h2 className="text-xl text-destructive">Currency Error!</h2>
+         <h2 className="text-xl text-[#FFC727] ">Currency Error!</h2>
          <p>{error?.message}</p>
          <Button onClick={reset} variant="link" className='text-whiteText '>
             <RiRefreshLine className="w-8 h-8" />

@@ -9,10 +9,14 @@ async function User() {
 
    return (
       <Link href="/dashboard/settings"
-         className="flex items-center gap-1 sm:[&_span]:hover:text-whiteText">
-         <Avatar className="hidden md:block">
-            <AvatarImage src={user?.image || "https://tamilnaducouncil.ac.in/wp-content/uploads/2020/04/dummy-avatar.jpg"} />
-            <AvatarFallback>{user?.name}</AvatarFallback>
+         className="group flex items-center gap-1 sm:[&_span]:hover:text-whiteText">
+         <Avatar className="hidden md:block border-2 border-whiteText/50
+         group-hover:border-whiteText group-hover:scale-105 transition-all">
+            <AvatarImage
+               src={user?.image || "https://tamilnaducouncil.ac.in/wp-content/uploads/2020/04/dummy-avatar.jpg"} />
+            <AvatarFallback >
+               {user?.name}
+            </AvatarFallback>
          </Avatar>
          <span className='p-1 md:p-2 sm:text-whiteText/50 transition-all max-w-[160px] sm:max-w-fit'>
             {user?.name || "Name"}

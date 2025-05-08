@@ -6,12 +6,19 @@ import SettingsAccountForm from "./settings-account-form"
 import { UserProps } from "@/types"
 import SettingsPasswordForm from "./settings-password-form"
 import SettingsTab from "./settings-tab"
+import SettingsAvatarForm from './settings-avatar-form';
+import SettingsAvatar from './settings-avatar';
 
 
-function SettingsTabsContainer({ user }: UserProps) {
+type SettingsTabsProps = UserProps & {
+   provider: boolean
+}
+
+function SettingsTabsContainer({ user, provider }: SettingsTabsProps) {
    const router = useRouter();
    const params = useSearchParams();
    const settings = params.get("tab") || "account"
+
 
 
    const handleClick = (value: string) => {
@@ -53,25 +60,39 @@ function SettingsTabsContainer({ user }: UserProps) {
          <SettingsTab
             value="image"
             title="Image"
-            description="Change your avatar here. Click save when you're done.">
-            IMAGE
+            description={
+               provider ?
+                  "Change your avatar here. Click save when you're done." :
+                  "Can't make any changes, because you logged by Google or Github provider."}>
+            {provider ?
+               <SettingsAvatarForm
+                  defaultValues={{ image: user?.image || "" }} /> :
+               <SettingsAvatar src={user?.image || ""} />}
          </SettingsTab>
 
          <SettingsTab
             value="account"
             title="Account"
-            description="Make changes to your account here. Click save when you're done.">
-            <SettingsAccountForm
-               defaultValues={{ name: user?.name }} />
+            description={provider ?
+               "Make changes to your account here. Click save when you're done." :
+               "Can't make any changes, because you logged by Google or Github provider."}>
+            {provider ?
+               <SettingsAccountForm
+                  defaultValues={{ name: user?.name }} /> :
+               <p className='text-white/80'>User name:
+                  <span className='text-[#FFC727] pl-2'> {user?.name}</span>
+               </p>
+            }
          </SettingsTab>
 
          <SettingsTab
             value="password"
             title="Password"
-            description="Change your account password here. Click save when you're done."
-            trigger="Password"
-            accordionText="New password must be 8–20 characters and include at least one uppercase letter, one lowercase letter, one number, and one special character (!@#$%^&*).">
-            <SettingsPasswordForm />
+            description={
+               provider ?
+                  "Change your account password here. Click save when you're done." :
+                  "Can't make any changes, because you logged by Google or Github provider."}>
+            {provider ? <SettingsPasswordForm /> : null}
          </SettingsTab>
 
       </Tabs >

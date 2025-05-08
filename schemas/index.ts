@@ -1,7 +1,6 @@
 import * as z from "zod"
 
 
-
 export const LoginSchema = z.object({
    email: z.string().email({
       message: "Email is required"
@@ -62,7 +61,7 @@ export const NewPasswordSchema = z.object({
 export type TNewPasswordSchema = z.infer<typeof NewPasswordSchema>
 
 
-//TRANSACTIONS
+//..................................TRANSACTIONS
 
 export const AddTransactionSchema = z.object({
    type: z.boolean(),
@@ -89,9 +88,6 @@ export const AddTransactionSchema = z.object({
       path: ["category"]
    },
 )
-
-
-
 export type TAddTransactionSchema = z.infer<typeof AddTransactionSchema>
 
 
@@ -107,45 +103,18 @@ export const EditTransactionSchema = z.object({
    transactionDate: z.string(),
    createdAt: z.date()
 })
-
-
-
 export type TEditTransactionSchema = z.infer<typeof EditTransactionSchema>
 
 
-export const UserSettingsSchema = z.object({
-   name: z.optional(z.string()
-      .min(3, { message: "Min 3 characters" })
-      .max(30, { message: "Max 30 characters" })),
-   image: z.optional(z.string()),
-   password: z.optional(z.string().min(6)),
-   newPassword: z.optional(z.string().min(6)),
-}).refine((data) => {
-   if (data.password && !data.newPassword) {
-      return false
-   }
-   return true
-},
-   {
-      message: "New password is required!",
-      path: ["newPassword"]
-   },
-)
 
+//................. USER SETTINGS......................
 
-export type TUserSettingsSchema = z.infer<typeof UserSettingsSchema>
-
-
-
-// user settings
 
 export const UserNameSchema = z.object({
    name: z.string()
       .min(3, { message: "Min 3 characters" })
       .max(30, { message: "Max 30 characters" }),
 })
-
-
 export type TUserNameSchema = z.infer<typeof UserNameSchema>
 
 
@@ -167,7 +136,6 @@ const newPasswordSchema = z.optional(
    });
 
 
-
 export const UserPasswordSchema = z.object({
    password: z.optional(z.string().min(6)),
    newPassword: newPasswordSchema
@@ -182,6 +150,10 @@ export const UserPasswordSchema = z.object({
       path: ["newPassword"]
    },
 )
-
-
 export type TUserPasswordSchema = z.infer<typeof UserPasswordSchema>
+
+
+export const UserAvatarSchema = z.object({
+   image: z.string().min(6)
+})
+export type TUserAvatarSchema = z.infer<typeof UserAvatarSchema>
