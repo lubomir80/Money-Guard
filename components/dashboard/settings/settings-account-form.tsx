@@ -43,8 +43,10 @@ function SettingsAccountForm({ defaultValues }: SettingsAccountFormProps) {
 
 
    const onSubmit: SubmitHandler<TUserNameSchema> = (values) => {
+      const name = values.name.trim()
+
       startTransition(() => {
-         updateUserName(values.name).then((res) => {
+         updateUserName(name).then((res) => {
             if (res.error) {
                toast.error(res.error, {
                   className: "toast-message",
@@ -54,7 +56,7 @@ function SettingsAccountForm({ defaultValues }: SettingsAccountFormProps) {
                toast.success(res.success, {
                   className: "toast-message",
                })
-               form.reset(form.getValues());
+               form.reset({ name });
             }
          })
       })

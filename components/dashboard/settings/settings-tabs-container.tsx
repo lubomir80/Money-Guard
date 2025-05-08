@@ -8,6 +8,7 @@ import SettingsPasswordForm from "./settings-password-form"
 import SettingsTab from "./settings-tab"
 import SettingsAvatarForm from './settings-avatar-form';
 import SettingsAvatar from './settings-avatar';
+import SettingsLock from './settings-lock';
 
 
 type SettingsTabsProps = UserProps & {
@@ -73,15 +74,22 @@ function SettingsTabsContainer({ user, provider }: SettingsTabsProps) {
          <SettingsTab
             value="account"
             title="Account"
-            description={provider ?
-               "Make changes to your account here. Click save when you're done." :
-               "Can't make any changes, because you logged by Google or Github provider."}>
+            description={
+               provider ?
+                  "Make changes to your account here. Click save when you're done." :
+                  "Can't make any changes, because you logged by Google or Github provider."}>
             {provider ?
                <SettingsAccountForm
                   defaultValues={{ name: user?.name }} /> :
-               <p className='text-white/80'>User name:
-                  <span className='text-[#FFC727] pl-2'> {user?.name}</span>
-               </p>
+               <>
+                  <p className='text-white/80 text-center mb-8'>
+                     User name:
+                     <span className='text-[#FFC727] pl-2'>
+                        {user?.name}
+                     </span>
+                  </p>
+                  <SettingsLock />
+               </>
             }
          </SettingsTab>
 
@@ -92,7 +100,8 @@ function SettingsTabsContainer({ user, provider }: SettingsTabsProps) {
                provider ?
                   "Change your account password here. Click save when you're done." :
                   "Can't make any changes, because you logged by Google or Github provider."}>
-            {provider ? <SettingsPasswordForm /> : null}
+            {provider ?
+               <SettingsPasswordForm /> : <SettingsLock />}
          </SettingsTab>
 
       </Tabs >
