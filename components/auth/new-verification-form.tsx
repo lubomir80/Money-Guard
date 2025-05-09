@@ -3,8 +3,9 @@
 import { redirect, useSearchParams } from "next/navigation"
 import { useCallback, useEffect, useState } from "react"
 import { newVerification } from "@/actions/new-verification"
-import { FormError } from "../Form-error"
+
 import { FormSuccess } from "../Form-success"
+import { FormError } from "../Form-error"
 import CardWrapper from "../card/CardWrapper"
 import Spinner from "../Spinner"
 

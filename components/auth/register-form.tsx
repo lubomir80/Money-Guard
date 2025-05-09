@@ -18,10 +18,11 @@ import {
 import { Input } from "@/components/ui/input"
 import { register } from '@/actions/register';
 import { useState, useTransition } from 'react';
-import { FormError } from '../Form-error';
+
 import { FormSuccess } from '../Form-success';
 import HidePassword from '../HidePassword';
 import { redirect } from 'next/navigation';
+import { FormError } from '../Form-error';
 
 
 
