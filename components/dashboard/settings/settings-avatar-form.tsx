@@ -15,8 +15,8 @@ import { Input } from "@/components/ui/input";
 import { updateUserAvatar } from "@/actions/settings";
 import { useState, useTransition } from "react";
 import { toast } from "react-toastify";
-import SettingsReset from "./settings-reset";
-import SettingsAvatar from "./settings-avatar";
+import SettingsReset from "./Settings-reset";
+import SettingsAvatar from "./Settings-avatar";
 
 type SettingsAvatarFormProps = {
    defaultValues: TUserAvatarSchema

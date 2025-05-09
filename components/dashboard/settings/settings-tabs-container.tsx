@@ -2,13 +2,13 @@
 
 import { redirect, useRouter, useSearchParams } from 'next/navigation';
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import SettingsAccountForm from "./settings-account-form"
+import SettingsAccountForm from "./Settings-account-form"
 import { UserProps } from "@/types"
-import SettingsPasswordForm from "./settings-password-form"
-import SettingsTab from "./settings-tab"
-import SettingsAvatarForm from './settings-avatar-form';
-import SettingsAvatar from './settings-avatar';
-import SettingsLock from './settings-lock';
+import SettingsPasswordForm from "./Settings-password-form"
+import SettingsTab from "./Settings-tab"
+import SettingsAvatarForm from './Settings-avatar-form';
+import SettingsAvatar from './Settings-avatar';
+import SettingsLock from './Settings-lock';
 
 
 type SettingsTabsProps = UserProps & {

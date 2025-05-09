@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import DeleteDialog from "./delete-dialog"
+import DeleteDialog from "./Delete-dialog"
 import { Button } from "@/components/ui/button"
 
 function DeleteTransaction({ onDelete, isPending }: { onDelete: () => void, isPending?: boolean }) {

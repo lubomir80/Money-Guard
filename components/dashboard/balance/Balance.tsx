@@ -15,7 +15,9 @@ function Balance({ totalAmount }: { totalAmount: number }) {
          <h1 className="pt-2 font-bold text-2xl tracking-wider">
             {formatAmount(totalAmount)}
             <span className="text-lg"> USD</span>
-            <span className="hidden md:inline pl-2">{categorizeAmount(totalAmount)}</span>
+            <span className="hidden md:inline pl-2 cursor-default">
+               {categorizeAmount(totalAmount)}
+            </span>
          </h1>
       </section>
    )

@@ -15,11 +15,11 @@ import {
    FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { FormError } from '../form-error';
-import { FormSuccess } from '../form-success';
+import { FormError } from '../Form-error';
+import { FormSuccess } from '../Form-success';
 import { redirect, useSearchParams } from 'next/navigation';
 import { newPassword } from '@/actions/new-password';
-import HidePassword from '../dashboard/settings/HidePassword';
+import HidePassword from '../HidePassword';
 
 
 

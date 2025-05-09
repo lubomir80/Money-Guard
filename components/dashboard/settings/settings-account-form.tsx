@@ -17,7 +17,7 @@ import { UserNameSchema, TUserNameSchema } from "@/schemas";
 import { updateUserName } from "@/actions/settings";
 import { useTransition } from "react";
 import { toast } from "react-toastify";
-import SettingsReset from "./settings-reset";
+import SettingsReset from "./Settings-reset";
 
 type SettingsAccountFormProps = {
    defaultValues: TUserNameSchema

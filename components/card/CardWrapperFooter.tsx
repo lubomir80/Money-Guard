@@ -1,8 +1,8 @@
 import { useRouter } from 'next/navigation'
 import { CardFooter } from '../ui/card'
 import { Button } from '../ui/button'
-import GoogleButton from '../google-button'
-import GithubButton from '../github-button'
+import GoogleButton from '../Google-button'
+import GithubButton from '../Github-button'
 
 function CardWrapperFooter({ footerLabel, footerHref, showSocial }: {
    showSocial?: boolean,

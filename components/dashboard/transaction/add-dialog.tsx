@@ -8,7 +8,7 @@ import {
 
 import { DialogTitle } from "@radix-ui/react-dialog";
 import CardWrapper from "@/components/card/CardWrapper";
-import AddTransactionForm from "./add-transaction-form";
+import AddTransactionForm from "./Add-transaction-form";
 
 type AddDialogProps = {
    open: boolean;

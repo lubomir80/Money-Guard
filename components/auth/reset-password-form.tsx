@@ -15,8 +15,8 @@ import {
    FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { FormError } from '../form-error';
-import { FormSuccess } from '../form-success';
+import { FormError } from '../Form-error';
+import { FormSuccess } from '../Form-success';
 import { reset } from '@/actions/reset';
 
 

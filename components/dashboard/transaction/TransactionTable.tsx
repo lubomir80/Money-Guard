@@ -13,7 +13,7 @@ import { useOptimistic } from 'react';
 import { deleteTransaction } from "@/actions/transaction";
 import { toast } from "react-toastify";
 import TransactionMobileItem from "./TransactionMobileItem";
-import CallToAdd from "./call-to-add";
+import CallToAdd from "./Call-to-add";
 
 function TransactionTable({ transactions }: TransactionsProps) {
 

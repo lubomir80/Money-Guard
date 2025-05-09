@@ -1,5 +1,5 @@
 import { auth } from "@/auth";
-import SettingsTabsContainer from "@/components/dashboard/settings/settings-tabs-container";
+import SettingsTabsContainer from "@/components/dashboard/settings/Settings-tabs-container";
 import { getAccountByUserId } from "@/data/account";
 
 

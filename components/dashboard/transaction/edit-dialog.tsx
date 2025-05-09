@@ -5,7 +5,7 @@ import {
    DialogDescription,
    DialogHeader,
 } from "@/components/ui/dialog"
-import EditTransactionForm from "./edit-transaction-form"
+import EditTransactionForm from "./Edit-transaction-form"
 import CardWrapper from "@/components/card/CardWrapper"
 import { DialogTitle } from "@radix-ui/react-dialog";
 import { EditTransactionType } from "@/types";

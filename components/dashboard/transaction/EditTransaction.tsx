@@ -3,7 +3,7 @@ import { EditTransactionProps } from '@/types'
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { MdEdit } from 'react-icons/md'
-import EditDialog from './edit-dialog'
+import EditDialog from './Edit-dialog'
 
 
 
