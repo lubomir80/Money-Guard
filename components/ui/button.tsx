@@ -19,7 +19,7 @@ const buttonVariants = cva(
                "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
             ghost: "hover:bg-accent hover:text-accent-foreground",
             link: "text-primary underline-offset-4 hover:underline",
-            orange: "bg-gradient-to-r from-[#FFC727] via-[#9E40BA] to-[#7000FF] shadow-xl",
+            orange: "bg-gradient-to-r from-yellow via-[#9E40BA] to-[#7000FF] shadow-xl",
             white: "bg-whiteText text-purple-800 shadow-xl",
             exit: "flex bg-transparent capitalize hover:bg-transparent [&_svg]:size-5 [&_svg]:shrink-0",
             close: " text-[#9E40BA] [&_svg]:size-5 bg-transparent hover:text-[#7000FF] hover:bg-transparent border-none shadow-none"

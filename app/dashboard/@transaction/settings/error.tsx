@@ -17,17 +17,21 @@ export default function Error({
    }, [error])
 
    return (
-      <section className="flex flex-col items-center justify-center gap-5 rounded-xl py-8  ">
+      <section className="flex flex-col items-center justify-center gap-5 rounded-xl py-8 ">
          <h2 className="text-[32px]">User Error!</h2>
 
-         <div className="flex flex-col gap-8 items-center pt-10 pb-20 sm:py-20 px-5  text-[#FFC727]  w-full rounded-md tracking-wider text-[0.8rem]">
-            <BsExclamationCircleFill className="w-[24px] h-[24px] blob" />
-            <p className='max-w-[450px] mx-auto'>{error?.message}</p>
+         <div className="flex flex-col gap-8 items-center pt-10 pb-20 sm:py-20 px-5  text-yellow  w-full rounded-md tracking-wider text-[0.8rem] text-center">
+            <div className='flex justify-center'>
+               <BsExclamationCircleFill size={40} className='blob' />
+            </div>
+            <p className='max-w-[450px] mx-auto text-[16px]'>
+               {error?.message}
+            </p>
          </div>
 
          <div className="flex flex-col gap-4 w-[300px] mx-auto">
-            <Button asChild variant="link"
-               className='text-whiteText text-sm tracking-wider'>
+            <Button asChild variant="orange" size="lg"
+               className='text-sm tracking-wider'>
                <Link href="/dashboard">
                   Back to dashboard
                </Link>

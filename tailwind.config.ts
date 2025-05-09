@@ -17,6 +17,7 @@ export default {
             background: 'hsl(var(--background))',
             foreground: 'hsl(var(--foreground))',
             whiteText: '#FBFBFB',
+            yellow: "#FFC727",
             mango: '#FF868D',
             card: {
                DEFAULT: 'hsl(var(--card))',

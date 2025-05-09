@@ -12,6 +12,7 @@ export default async function TransactionPage() {
    const transactions: Transaction[] = await getTransactionByUserId(session?.user?.id) as Transaction[]
    const isAddTransaction = transactions?.length
 
+
    return (
       <>
          <h2 className="text-[24px] text-center md:text-start md:text-[30px] mb-5">

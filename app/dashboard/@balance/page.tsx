@@ -15,7 +15,6 @@ async function BalancePage() {
    const totalAmount = totalIncome - totalExpanse
 
 
-
    return (
       <Balance totalAmount={totalAmount} />
    )

@@ -84,7 +84,7 @@ function SettingsTabsContainer({ user, provider }: SettingsTabsProps) {
                <>
                   <p className='text-white/80 text-center mb-8'>
                      User name:
-                     <span className='text-[#FFC727] pl-2'>
+                     <span className='text-yellow pl-2'>
                         {user?.name}
                      </span>
                   </p>

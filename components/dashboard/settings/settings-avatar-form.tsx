@@ -133,7 +133,7 @@ function SettingsAvatarForm({ defaultValues }: SettingsAvatarFormProps) {
                   Save
                </Button>
                {postImage &&
-                  (<span className="mt-6 inline-block text-sm text-[#FFC727]">
+                  (<span className="mt-6 inline-block text-sm text-yellow">
                      You have unsaved changes
                   </span>
                   )}

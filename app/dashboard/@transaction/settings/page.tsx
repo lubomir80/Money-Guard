@@ -11,7 +11,6 @@ async function SettingsPage() {
    const isAuthProvider = account?.length === 0 && user?.isOauth
 
 
-
    return (
       <div className="overflow-y-auto md:pr-2">
          <h2 className="text-[24px] text-center md:text-start md:text-[30px] mb-5">Settings</h2>

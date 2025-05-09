@@ -31,7 +31,7 @@ function SettingsTab({
 
    return (
       <TabsContent value={value}>
-         <Card className="py-10 md:pb-16 bg-[#5710a3]/80 border border-black/10 text-whiteText">
+         <Card className="py-10 md:pb-16 bg-transparent text-whiteText">
             <div className="mx-auto max-w-[400px] space-y-4 ">
                <CardHeader>
                   <CardTitle className="text-3xl">{title}</CardTitle>
@@ -42,7 +42,7 @@ function SettingsTab({
                      {trigger && <Accordion
                         type="single"
                         collapsible
-                        className="text-[#FFC727] text-[12px] ">
+                        className="text-yellow text-[12px] ">
                         <AccordionItem value="item-1">
                            <AccordionTrigger>{trigger}</AccordionTrigger>
                            <AccordionContent className="">
