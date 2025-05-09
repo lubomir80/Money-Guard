@@ -18,11 +18,10 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { login } from '@/actions/login';
+import HidePassword from '@/components/HidePassword';
+import { FormError } from '@/components/Form-error';
+import { FormSuccess } from '@/components/Form-success';
 
-
-import HidePassword from '../HidePassword';
-import { FormError } from '../Form-error';
-import { FormSuccess } from '../Form-success';
 
 
 
