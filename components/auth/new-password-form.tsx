@@ -19,7 +19,7 @@ import { FormError } from '../form-error';
 import { FormSuccess } from '../form-success';
 import { redirect, useSearchParams } from 'next/navigation';
 import { newPassword } from '@/actions/new-password';
-import HidePassword from '../dashboard/settings/HidePassword';
+import HidePassword from '../HidePassword';
 
 
 

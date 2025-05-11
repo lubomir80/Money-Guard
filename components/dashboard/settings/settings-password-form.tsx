@@ -17,7 +17,7 @@ import { updateUserPassword } from "@/actions/settings";
 import { useState, useTransition } from "react";
 import { toast } from "react-toastify";
 import SettingsReset from "./settings-reset";
-import HidePassword from "./HidePassword";
+import HidePassword from "../../HidePassword";
 
 type FormFields = keyof TUserPasswordSchema;
 

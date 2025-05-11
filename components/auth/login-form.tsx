@@ -20,7 +20,7 @@ import { Input } from "@/components/ui/input"
 import { login } from '@/actions/login';
 import { FormError } from '../form-error';
 import { FormSuccess } from '../form-success';
-import HidePassword from '../dashboard/settings/HidePassword';
+import HidePassword from '../HidePassword';
 
 
 

@@ -1,4 +1,4 @@
-import React from 'react'
+
 
 function TransactionType({ type }: { type: boolean }) {
    const incomeStyle = !type ? "text-[#FFB627]" : ""

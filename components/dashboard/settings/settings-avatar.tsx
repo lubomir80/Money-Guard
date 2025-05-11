@@ -16,7 +16,7 @@ function SettingsAvatar({ label, src, alt = "", isPending }: SettingsAvatarProps
 
    if (label) {
       return (
-         <FormLabel className="block w-[200] h-[200] border-[6px] mx-auto border-white rounded-full overflow-hidden relative blob cursor-pointer bg-white/30"
+         <FormLabel className="block w-[200px] h-[200px] border-[6px] mx-auto border-white rounded-full overflow-hidden relative blob cursor-pointer bg-white/30"
             htmlFor="upload">
             {isPending ?
                <div className='h-full w-full flex items-center justify-center'>
@@ -27,7 +27,7 @@ function SettingsAvatar({ label, src, alt = "", isPending }: SettingsAvatarProps
       )
    } else {
       return (
-         <div className="block w-[200] h-[200] border-[6px] mx-auto border-white rounded-full overflow-hidden relative bg-white/30 relative">
+         <div className="block w-[200px] h-[200px] border-[6px] mx-auto border-white rounded-full overflow-hidden relative bg-white/30 relative">
             <Image src={src} alt={alt} fill className="object-cover blur-sm" />
             <div className='flex justify-center items-center absolute w-full h-full bg-white/20'>
                <RiLockPasswordFill

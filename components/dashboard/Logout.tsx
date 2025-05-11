@@ -3,7 +3,8 @@
 import { useState } from "react"
 import { Button } from "../ui/button"
 import { IoExitOutline } from "react-icons/io5"
-import LogoutDialog from "./logout-dialog"
+import LogoutDialog from "./Logout-dialog"
+
 
 function Logout() {
    const [open, setOpen] = useState(false)
