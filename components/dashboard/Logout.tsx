@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { Button } from "../ui/button"
 import { IoExitOutline } from "react-icons/io5"
-import LogoutDialog from "./Logout-dialog"
+import LogoutDialog from "./logout-dialog"
 
 
 function Logout() {
