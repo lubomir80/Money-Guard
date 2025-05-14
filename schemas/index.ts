@@ -99,9 +99,10 @@ export const EditTransactionSchema = z.object({
    comment: z.optional(z.string().min(5), {
       message: "Min 5 characters"
    }),
-   amount: z.optional(z.number().positive({
-      message: "Must be a positive"
-   })),
+   amount: z.number()
+      .positive({ message: "Must be a positive" })
+      .min(0, { message: "Amount must be at least 0" })
+      .max(999999, { message: "Amount must be less than or equal to 999999" }),
    transactionDate: z.string(),
    createdAt: z.date()
 })

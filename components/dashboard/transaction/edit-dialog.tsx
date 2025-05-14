@@ -19,6 +19,7 @@ type EditDialogProps = {
 
 function EditDialog({ open, setOpen, transaction }: EditDialogProps) {
 
+
    const handlerCloseDialog = () => setOpen(false)
 
    return (

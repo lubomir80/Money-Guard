@@ -13,11 +13,14 @@ import { toast } from "react-toastify"
 import { EditTransactionType } from "@/types"
 import { categories } from "@/helpers/category"
 import { formatDate } from "@/helpers"
+import SettingsReset from "../settings/settings-reset"
 
 type EditTransactionFormProps = {
    onSave: () => void,
    transaction: EditTransactionType
 }
+
+type FormFields = keyof TEditTransactionSchema;
 
 
 function EditTransactionForm({ onSave, transaction }: EditTransactionFormProps) {
@@ -26,14 +29,14 @@ function EditTransactionForm({ onSave, transaction }: EditTransactionFormProps) 
    const form = useForm<TEditTransactionSchema>({
       resolver: zodResolver(EditTransactionSchema),
       defaultValues: {
-         type: transaction.type,
-         category: transaction.category,
-         comment: transaction.comment,
-         amount: transaction.amount,
+         ...transaction,
          transactionDate: formatDate(transaction.transactionDate),
-         createdAt: transaction.createdAt
       }
    })
+
+   const { formState: { isDirty, dirtyFields, touchedFields } } = form;
+
+
 
    const onSubmit = (values: TEditTransactionSchema) => {
       startTransition(() => {
@@ -52,10 +55,20 @@ function EditTransactionForm({ onSave, transaction }: EditTransactionFormProps) 
          });
 
       })
-      form.reset()
    }
 
+   function onReset() {
+      form.reset({
+         ...transaction,
+         transactionDate: formatDate(transaction.transactionDate),
+      });
+   }
 
+   const hasUnsavedChanges =
+      isDirty &&
+      Object.keys(dirtyFields).some(
+         (field) => touchedFields[field as FormFields],
+      );
 
 
    return (
@@ -97,14 +110,19 @@ function EditTransactionForm({ onSave, transaction }: EditTransactionFormProps) 
                <FormField
                   control={form.control}
                   name="amount"
-                  render={({ field }) => {
+                  render={({ field: { onChange, ...fieldProps } }) => {
                      return <FormItem className='w-1/2 number-wrapper'>
                         <FormControl>
                            <Input
-                              {...field}
+                              {...fieldProps}
                               disabled={isPending}
                               step=".01"
                               type="number"
+                              autoComplete="off"
+                              onChange={(e) => {
+                                 const amount = Number(e.target.value)
+                                 onChange(amount)
+                              }}
                               className=" pl-6 border-b-2 border-whiteText/30
                               placeholder:text-whiteText/30 text-whiteText
                               focus:border-whiteText text-center"
@@ -124,7 +142,7 @@ function EditTransactionForm({ onSave, transaction }: EditTransactionFormProps) 
                               disabled={isPending}
                               min="2022-01-01"
                               type="date"
-                              className="pl-6 border-b-2 border-whiteText/30
+                              className="border-b-2 border-whiteText/30
                               placeholder:text-whiteText/30 text-whiteText
                               focus:border-whiteText text-center"
                            />
@@ -151,7 +169,9 @@ function EditTransactionForm({ onSave, transaction }: EditTransactionFormProps) 
                   </FormItem>
                }}
             />
-            <div className="flex flex-col gap-4 w-[300px] mx-auto">
+
+
+            <div className="flex flex-col gap-4 w-[300px] mx-auto text-center">
                <Button disabled={isPending} variant="orange" size="lg" type="submit" className="w-full">
                   Save
                </Button>
@@ -159,9 +179,19 @@ function EditTransactionForm({ onSave, transaction }: EditTransactionFormProps) 
                   onClick={onSave} size="lg" variant="white">
                   Cancel
                </Button>
+               {hasUnsavedChanges && (
+                  <div>
+                     <span className="mt-6 inline-block text-sm text-yellow mr-2">
+                        You have unsaved changes
+                     </span>
+                     <SettingsReset
+                        className="relative block"
+                        onReset={onReset} />
+                  </div>
+               )}
             </div>
          </form>
-      </Form>
+      </Form >
    )
 }
 

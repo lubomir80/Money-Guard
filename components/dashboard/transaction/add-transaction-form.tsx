@@ -99,7 +99,7 @@ function AddTransactionForm({ onSave }: AddTransactionFormProps) {
                <FormField
                   control={form.control}
                   name="amount"
-                  render={({ field: { value, onChange, ...fieldProps } }) => {
+                  render={({ field: { onChange, ...fieldProps } }) => {
                      return <FormItem className='w-1/2 number-wrapper'>
                         <FormControl>
                            <Input
@@ -114,11 +114,9 @@ function AddTransactionForm({ onSave }: AddTransactionFormProps) {
 
 
                               onChange={(e) => {
-                                 console.log(value)
                                  const amount = Number(e.target.value)
                                  onChange(amount)
-                              }
-                              }
+                              }}
                               className="pl-6 border-b-2 border-whiteText/30
                               placeholder:text-whiteText/30 text-whiteText
                               focus:border-whiteText text-center"
