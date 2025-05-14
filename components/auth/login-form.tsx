@@ -58,6 +58,8 @@ function LoginForm() {
    }
 
 
+
+
    return (
       <CardWrapper
          headerLogo
@@ -72,24 +74,30 @@ function LoginForm() {
                <FormField
                   control={form.control}
                   name="email"
-                  render={({ field }) => (
+                  render={({ field: { onChange, ...fieldProps } }) => (
                      <FormItem className="relative">
                         <MdEmail className="
                            absolute top-2 w-4 h-4 text-whiteText/30" />
                         <FormControl >
                            <Input
+                              {...fieldProps}
+                              className="
+                              pl-6
+                              border-b-2 
+                              border-whiteText/30
+                              placeholder:text-whiteText/30
+                              text-whiteText
+                              focus:border-whiteText"
                               tabIndex={1}
                               disabled={isPending}
-                              className="
-                                 pl-6
-                                 border-b-2 
-                                 border-whiteText/30
-                                 placeholder:text-whiteText/30
-                                 text-whiteText
-                                 focus:border-whiteText"
                               placeholder="E-mail"
-                              {...field}
-                              type="email" />
+                              type="email"
+                              onChange={(e) => {
+                                 if (error) setError("")
+                                 if (success) setSuccess("")
+                                 onChange(e.target.value)
+                              }}
+                           />
                         </FormControl>
                         <FormMessage />
                      </FormItem>
@@ -98,7 +106,7 @@ function LoginForm() {
                <FormField
                   control={form.control}
                   name="password"
-                  render={({ field }) => (
+                  render={({ field: { onChange, ...fieldProps } }) => (
                      <FormItem className="relative">
                         <HidePassword
                            className='top-0 -right-3'
@@ -108,14 +116,21 @@ function LoginForm() {
                         <IoMdLock className="absolute top-0 w-4 h-4 text-whiteText/30" />
                         <FormControl>
                            <Input
-                              tabIndex={2}
-                              disabled={isPending}
+                              {...fieldProps}
                               className="pl-6 pr-8 border-b-2 border-whiteText/30
                               placeholder:text-whiteText/30 text-whiteText
                               focus:border-whiteText"
+                              tabIndex={2}
+                              disabled={isPending}
                               placeholder="Password"
-                              {...field}
-                              type={isHidePassword ? "text" : "password"} />
+                              type={isHidePassword ? "text" : "password"}
+                              onChange={(e) => {
+                                 if (error) setError("")
+                                 if (success) setSuccess("")
+                                 onChange(e.target.value)
+                              }}
+
+                           />
                         </FormControl>
                         <FormMessage />
                      </FormItem>

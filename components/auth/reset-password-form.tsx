@@ -2,7 +2,7 @@
 
 import CardWrapper from '../card/CardWrapper'
 import CardFormButtons from '../card/CardFormButtons';
-import { useEffect, useState, useTransition } from 'react';
+import { useState, useTransition } from 'react';
 import { MdEmail } from "react-icons/md";
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -33,14 +33,7 @@ function ResetPasswordForm() {
       }
    })
 
-   const email = form.watch("email")
 
-   useEffect(() => {
-      if (error || success) {
-         setError("")
-         setSuccess("")
-      }
-   }, [email, error, success])
 
 
    const onSubmit = (values: TResetSchema) => {
@@ -68,13 +61,13 @@ function ResetPasswordForm() {
                <FormField
                   control={form.control}
                   name="email"
-                  render={({ field }) => (
+                  render={({ field: { onChange, ...fields } }) => (
                      <FormItem className="relative">
                         <MdEmail className="
                            absolute top-2 w-4 h-4 text-whiteText/30" />
                         <FormControl >
                            <Input
-                              disabled={isPending}
+                              {...fields}
                               className="
                                  pl-6
                                  border-b-2 
@@ -82,9 +75,15 @@ function ResetPasswordForm() {
                                  placeholder:text-whiteText/30
                                  text-whiteText
                                  focus:border-whiteText"
+                              disabled={isPending}
                               placeholder="E-mail"
-                              {...field}
-                              type="email" />
+                              type="email"
+                              onChange={(e) => {
+                                 if (error) setError("")
+                                 if (success) setSuccess("")
+                                 onChange(e.target.value)
+                              }}
+                           />
                         </FormControl>
                         <FormMessage />
                      </FormItem>
