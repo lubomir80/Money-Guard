@@ -71,8 +71,10 @@ export const AddTransactionSchema = z.object({
    }).max(40, {
       message: "Max 40 characters"
    })),
-   amount: z.coerce.number().positive({
-      message: "Must be a positive"
+   amount: z.coerce.number({
+      invalid_type_error: "Amount must be a number",
+   }).positive().refine(val => !isNaN(val), {
+      message: "Please put some number",
    }),
    transactionDate: z.string()
 }).refine((data) => {
@@ -97,9 +99,9 @@ export const EditTransactionSchema = z.object({
    comment: z.optional(z.string().min(5), {
       message: "Min 5 characters"
    }),
-   amount: z.coerce.number().positive({
+   amount: z.optional(z.number().positive({
       message: "Must be a positive"
-   }),
+   })),
    transactionDate: z.string(),
    createdAt: z.date()
 })

@@ -29,17 +29,16 @@ function AddTransactionForm({ onSave }: AddTransactionFormProps) {
          type: true,
          category: "",
          comment: "",
-         amount: 0,
+         amount: undefined,
          transactionDate: currentDate
       }
    })
 
+
    const onSubmit = (values: TAddTransactionSchema) => {
-      const amount = Number(values.amount)
-      const newVales = { ...values, amount }
 
       startTransition(() => {
-         addTransaction(newVales).then((res) => {
+         addTransaction(values).then((res) => {
             if (res.error) {
                toast.error(res.error, {
                   className: "toast-message",
@@ -58,6 +57,8 @@ function AddTransactionForm({ onSave }: AddTransactionFormProps) {
    }
 
    const toggleHandler = form.watch("type")
+
+
 
 
    return (
@@ -98,18 +99,27 @@ function AddTransactionForm({ onSave }: AddTransactionFormProps) {
                <FormField
                   control={form.control}
                   name="amount"
-                  render={({ field }) => {
+                  render={({ field: { value, onChange, ...fieldProps } }) => {
                      return <FormItem className='w-1/2 number-wrapper'>
                         <FormControl>
                            <Input
-                              {...field}
+                              {...fieldProps}
                               disabled={isPending}
-                              placeholder="0"
+                              placeholder="0.00"
                               min="0"
                               max="999999"
                               step=".01"
                               type="number"
-                              className=" pl-6 border-b-2 border-whiteText/30
+                              autoComplete="off"
+
+
+                              onChange={(e) => {
+                                 console.log(value)
+                                 const amount = Number(e.target.value)
+                                 onChange(amount)
+                              }
+                              }
+                              className="pl-6 border-b-2 border-whiteText/30
                               placeholder:text-whiteText/30 text-whiteText
                               focus:border-whiteText text-center"
                            />
