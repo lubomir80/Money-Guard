@@ -3,7 +3,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 ### Mone-Guard
 
 
-Mone-Guard is a financial management application that helps you keep all your transactions in one place and track your expenses effectively. It features a secure authentication system powered by NextAuth.js v5.
+MoneyGuard is a full-stack web application that helps users track and manage their daily financial transactions. It features secure user authentication via Google, GitHub, or traditional email/password login with email verification. After signing up, users can add, update, or delete income and expense records. An interactive chart provides insights into spending patterns by category. Users can also update their personal account details through a dedicated profile section.
 
 ## 🚀 Features
 
